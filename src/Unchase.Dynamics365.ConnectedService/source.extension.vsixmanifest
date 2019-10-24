@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" ?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="Unchase.Dynamics365.ConnectedService.9e1496e7-4869-4c3e-8188-2738b2d1e920" Version="1.0" Language="en-US" Publisher="Unchase" />
+        <DisplayName>Unchase Dynamics365 Connected Service</DisplayName>
+        <Description xml:space="preserve">Connected service for Visual Studio to generate early-bound .NET Framework (or C++) classes that represent the entity data model used by Dynamics 365 for Customer Engagement.</Description>
+        <MoreInfo>https://github.com/unchase/Unchase.Dynamics365.Connectedservice</MoreInfo>
+        <License>Resources\EULA.txt</License>
+        <GettingStartedGuide>https://github.com/unchase/Unchase.Dynamics365.Connectedservice/blob/master/README.md</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/unchase/Unchase.Dynamics365.Connectedservice/blob/master/CHANGELOG.md</ReleaseNotes>
+        <Icon>Resources\logo_128x128.png</Icon>
+        <PreviewImage>Resources\preview_200x200.png</PreviewImage>
+        <Tags>Dynamics, CRM, Dynamics365, REST API, Code Generation, Connected Service, XRM, 365, D365, CommonDataService, CDS</Tags>
+        <Preview>true</Preview>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
+        <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Pro" />
+        <InstallationTarget Version="[15.0,17.0)" Id="Microsoft.VisualStudio.Enterprise" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,17.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+</PackageManifest>

@@ -1,0 +1,359 @@
+﻿<UserControl
+    x:Class="Unchase.Dynamics365.ConnectedService.View.ConfigDynamics365Endpoint"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:commands="clr-namespace:Unchase.Dynamics365.ConnectedService.Common.Commands"
+    xmlns:common="clr-namespace:Unchase.Dynamics365.ConnectedService.Common"
+    xmlns:converters="clr-namespace:Unchase.Dynamics365.ConnectedService.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="400"
+    d:DesignWidth="768"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:VisibilityConverter x:Key="VisibilityConverter" />
+        <converters:VisibilityToHyperlinkTextConverter x:Key="VisibilityToHyperlinkTextConverter" />
+        <commands:StackPanelChangeVisibilityCommand x:Key="StackPanelChangeVisibilityCommand" />
+        <Image x:Key="ReportABugButtonImage" Source="../Resources/NewBug.png" />
+    </UserControl.Resources>
+    <StackPanel
+        Margin="0,0,0,0"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Top">
+        <DockPanel HorizontalAlignment="Right">
+            <TextBlock Margin="5,8,5,5" Text="Report a bug :" />
+            <Button
+                x:Name="ReportABugButton"
+                Width="23"
+                Height="23"
+                MinWidth="23"
+                MinHeight="23"
+                MaxWidth="23"
+                MaxHeight="23"
+                Margin="5,5,10,5"
+                HorizontalAlignment="Right"
+                Click="ReportABugButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="../Resources/NewBug.png" Stretch="UniformToFill" />
+                </Button.Background>
+            </Button>
+        </DockPanel>
+
+        <TextBlock
+            Margin="0,0,10,5"
+            FontWeight="Bold"
+            Text="Generating Language (the language to use for the generated proxy code) :"
+            TextWrapping="WrapWithOverflow" />
+        <ComboBox
+            x:Name="LanguageOption"
+            Margin="20,5,10,5"
+            ItemsSource="{Binding LanguageOptions}"
+            SelectedItem="{Binding UserSettings.LanguageOption, Mode=TwoWay}" />
+
+        <TextBlock
+            Margin="0,5,10,5"
+            HorizontalAlignment="Stretch"
+            FontWeight="Bold"
+            Text="Service name :"
+            TextWrapping="WrapWithOverflow" />
+        <TextBox
+            x:Name="ServiceName"
+            Margin="20,5,10,5"
+            HorizontalAlignment="Stretch"
+            Text="{Binding Path=UserSettings.ServiceName, Mode=TwoWay}" />
+
+        <TextBlock
+            Margin="0,5,10,5"
+            HorizontalAlignment="Stretch"
+            FontWeight="Bold"
+            Text="Dynamics 365 service URI (a url or path to the SDK endpoint to contact for metadata) :"
+            TextWrapping="WrapWithOverflow" />
+
+        <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox
+                x:Name="Endpoint"
+                Margin="0,5,10,0"
+                HorizontalAlignment="Stretch"
+                IsEditable="True"
+                ItemsSource="{Binding Path=UserSettings.MruEndpoints}"
+                Text="{Binding Path=UserSettings.Endpoint, Mode=TwoWay, TargetNullValue='Enter your service endpoint...'}"
+                ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+            <Button
+                x:Name="OpenEndpointFileButton"
+                Grid.Column="1"
+                Width="70"
+                Height="20"
+                MinHeight="20"
+                MaxHeight="20"
+                Margin="5,5,0,0"
+                HorizontalAlignment="Right"
+                Click="OpenEndpointFileButton_OnClick">
+                <TextBlock Text="Browse" />
+            </Button>
+        </Grid>
+
+        <TextBlock
+            Margin="0,10,10,5"
+            HorizontalAlignment="Stretch"
+            TextWrapping="WrapWithOverflow">
+            <Bold>Additional options</Bold>
+            (<Hyperlink
+                Name="AdditionalOptionsHyperlink"
+                Command="{StaticResource StackPanelChangeVisibilityCommand}"
+                CommandParameter="{Binding ElementName=AdditionalOptionsPanel}">
+                <TextBlock
+                    Name="AdditionalOptionsHyperlinkText"
+                    Text="{Binding ElementName=AdditionalOptionsPanel, Path=Visibility, Converter={StaticResource VisibilityToHyperlinkTextConverter}}"
+                    TextWrapping="WrapWithOverflow" />
+            </Hyperlink>
+            )</TextBlock>
+        <StackPanel
+            x:Name="AdditionalOptionsPanel"
+            Margin="20,5,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                Text="Namespace (the namespace for the generated proxy code. The default namespace is the global namespace) : "
+                TextWrapping="WrapWithOverflow" />
+            <TextBox
+                x:Name="Namespace"
+                Margin="20,5,10,5"
+                HorizontalAlignment="Stretch"
+                Text="{Binding Path=UserSettings.Namespace, Mode=TwoWay}" />
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                Text="Generated proxy code file name prefix ('Generated' will be added after this) : "
+                TextWrapping="WrapWithOverflow" />
+            <TextBox
+                x:Name="GeneratedFileName"
+                Margin="20,5,10,5"
+                HorizontalAlignment="Stretch"
+                Text="{Binding Path=UserSettings.GeneratedFileName, Mode=TwoWay}" />
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                Text="Service Context Name (the name for the generated service context. If a value is passed in, it will be used for the Service Context. If no value is supplied, no service context is created) : "
+                TextWrapping="WrapWithOverflow" />
+            <TextBox
+                x:Name="ServiceContextName"
+                Margin="20,5,10,5"
+                HorizontalAlignment="Stretch"
+                Text="{Binding Path=UserSettings.ServiceContextName, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="GenerateMessages"
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                IsChecked="{Binding Path=UserSettings.GenerateMessages, Mode=TwoWay}">
+                <TextBlock Text="Generate messages." TextWrapping="Wrap" />
+            </CheckBox>
+            <StackPanel Margin="0,5,10,5" Visibility="{Binding ElementName=GenerateMessages, Path=IsChecked, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    FontWeight="Bold"
+                    Text="Message Namespace (namespace of messages to generate) : "
+                    TextWrapping="WrapWithOverflow" />
+                <TextBox
+                    x:Name="MessageNamespace"
+                    Margin="20,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    Text="{Binding Path=UserSettings.MessageNamespace, Mode=TwoWay}" />
+            </StackPanel>
+
+            <CheckBox
+                x:Name="GenerateCustomActions"
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                IsChecked="{Binding Path=UserSettings.GenerateCustomActions, Mode=TwoWay}">
+                <TextBlock Text="Generate wrapper classes for custom actions (generate request and response classes for custom actions)." TextWrapping="Wrap" />
+            </CheckBox>
+
+            <Separator Margin="0,5,10,5" />
+
+            <CheckBox
+                x:Name="EnableDebugMode"
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                FontWeight="Bold"
+                IsChecked="{Binding Path=UserSettings.EnableDebugMode, Mode=TwoWay}">
+                <TextBlock Text="Enable Generation Tracing (it is may take additional several minutes)." TextWrapping="Wrap" />
+            </CheckBox>
+
+            <CheckBox
+                x:Name="AddClientNuGet"
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                Content="Add client NuGet-package before generation."
+                FontWeight="Bold"
+                IsChecked="{Binding Path=UserSettings.AddClientNuGet, Mode=TwoWay}" />
+
+            <CheckBox
+                x:Name="OpenGeneratedFilesOnComplete"
+                Margin="0,5,10,5"
+                HorizontalAlignment="Stretch"
+                Content="Open generated files on complete in IDE."
+                FontWeight="Bold"
+                IsChecked="{Binding Path=UserSettings.OpenGeneratedFilesOnComplete, Mode=TwoWay}" />
+        </StackPanel>
+
+        <TextBlock
+            Margin="0,10,10,5"
+            HorizontalAlignment="Stretch"
+            TextWrapping="WrapWithOverflow">
+            <Bold>Connecting to CRM</Bold>
+            (<Hyperlink
+                Name="NetworkCredentialsHyperlink"
+                Command="{StaticResource StackPanelChangeVisibilityCommand}"
+                CommandParameter="{Binding ElementName=NetworkCredentialsPanel}">
+                <TextBlock
+                    Name="NetworkCredentialsHyperlinkText"
+                    Text="{Binding ElementName=NetworkCredentialsPanel, Path=Visibility, Converter={StaticResource VisibilityToHyperlinkTextConverter}}"
+                    TextWrapping="WrapWithOverflow" />
+            </Hyperlink>
+            )</TextBlock>
+        <StackPanel
+            x:Name="NetworkCredentialsPanel"
+            Margin="20,5,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+
+            <Grid Margin="0,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <RadioButton
+                    x:Name="InteractiveLoginRadioButton"
+                    HorizontalAlignment="Stretch"
+                    Content="Interactive Login"
+                    GroupName="ConnectionMethod"
+                    IsChecked="{Binding Path=UserSettings.UseInteractiveLogin, Mode=TwoWay}" />
+                <RadioButton
+                    x:Name="ConnectionStringRadioButton"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Content="Connection String"
+                    GroupName="ConnectionMethod"
+                    IsChecked="{Binding UserSettings.UseConnectionString, Mode=TwoWay}" />
+                <RadioButton
+                    x:Name="AuthenticationCredentialsRadioButton"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    Content="Authentication Credentials"
+                    GroupName="ConnectionMethod"
+                    IsChecked="{Binding UserSettings.UseNetworkCredentials, Mode=TwoWay}" />
+            </Grid>
+
+            <StackPanel Margin="0,5,10,5" Visibility="{Binding ElementName=ConnectionStringRadioButton, Path=IsChecked, Converter={StaticResource VisibilityConverter}}">
+                <TextBlock
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    Text="Connection String wich contains information, provided as a single string, for connecting to a Dynamics 365 organization (if provided, all other connect info is ignored) : "
+                    TextWrapping="WrapWithOverflow" />
+                <TextBox
+                    x:Name="ConnectionString"
+                    Margin="20,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    Text="{Binding Path=UserSettings.ConnectionString, Mode=TwoWay}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5,10,5" Visibility="{Binding ElementName=InteractiveLoginRadioButton, Path=IsChecked, Converter={StaticResource VisibilityConverter}}">
+                <CheckBox
+                    x:Name="UseInteractiveLogin"
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    IsChecked="{Binding Path=UserSettings.UseInteractiveLogin, Mode=TwoWay}"
+                    IsEnabled="false">
+                    <TextBlock Text="Use Interactive Login (presents a login dialog to log into the Dynamics 365 service with, if passed all other connect info is ignored)." TextWrapping="Wrap" />
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,5,10,5" Visibility="{Binding ElementName=AuthenticationCredentialsRadioButton, Path=IsChecked, Converter={StaticResource VisibilityConverter}}">
+                <CheckBox
+                    x:Name="UseOAuth"
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    IsChecked="{Binding Path=UserSettings.UseOAuth, Mode=TwoWay}">
+                    <TextBlock Text="Use OAuth (try to login with oAuth to CRM Online)." TextWrapping="Wrap" />
+                </CheckBox>
+
+                <TextBlock
+                    Margin="0,5,10,5"
+                    HorizontalAlignment="Stretch"
+                    Text="Authentication credentials (connecting to the server for authentication) : "
+                    TextWrapping="WrapWithOverflow" />
+                <StackPanel Margin="23,0,0,0" Visibility="{Binding ElementName=AuthenticationCredentialsRadioButton, Path=IsChecked, Converter={StaticResource VisibilityConverter}}">
+                    <DockPanel>
+                        <TextBlock
+                            x:Name="NetworkCredentialsUserNameLabel"
+                            Width="80"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Left"
+                            Text="UserName :"
+                            TextWrapping="WrapWithOverflow" />
+                        <TextBox
+                            x:Name="NetworkCredentialsUserName"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Stretch"
+                            Text="{Binding NetworkCredentialsUserName, Mode=TwoWay}" />
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock
+                            x:Name="NetworkCredentialsPasswordLabel"
+                            Width="80"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Left"
+                            Text="Password :"
+                            TextWrapping="WrapWithOverflow" />
+                        <PasswordBox
+                            x:Name="NetworkCredentialsPassword"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Stretch"
+                            common:PasswordBoxAssistant.BindPassword="True"
+                            common:PasswordBoxAssistant.BoundPassword="{Binding Path=NetworkCredentialsPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Background="{Binding ElementName=NetworkCredentialsUserName, Path=Background, Mode=TwoWay}"
+                            BorderBrush="{Binding ElementName=NetworkCredentialsUserName, Path=BorderBrush, Mode=TwoWay}"
+                            CaretBrush="{Binding ElementName=NetworkCredentialsUserName, Path=CaretBrush, Mode=TwoWay}"
+                            FontStyle="{Binding ElementName=NetworkCredentialsUserName, Path=FontStyle, Mode=TwoWay}"
+                            Foreground="{Binding ElementName=NetworkCredentialsUserName, Path=Foreground, Mode=TwoWay}"
+                            PasswordChar="*"
+                            SelectionBrush="{Binding ElementName=NetworkCredentialsUserName, Path=SelectionBrush, Mode=TwoWay}" />
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock
+                            x:Name="NetworkCredentialsDomainLabel"
+                            Width="80"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Left"
+                            Text="Domain :"
+                            TextWrapping="WrapWithOverflow" />
+                        <TextBox
+                            x:Name="NetworkCredentialsDomain"
+                            Margin="0,5,10,5"
+                            HorizontalAlignment="Stretch"
+                            Text="{Binding NetworkCredentialsDomain, Mode=TwoWay}" />
+                    </DockPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
