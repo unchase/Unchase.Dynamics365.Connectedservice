@@ -424,7 +424,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.CustomizeCodeDomServices}"
                     Text="{Binding Path=UserSettings.CustomizeCodeDomService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithCustomizeCodeDomServiceButton"
                     Grid.Column="1"
@@ -457,7 +457,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.CodeWriterFilterServices}"
                     Text="{Binding Path=UserSettings.CodeWriterFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithCodeWriterFilterServiceButton"
                     Grid.Column="1"
@@ -490,7 +490,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.CodeWriterMessageFilterServices}"
                     Text="{Binding Path=UserSettings.CodeWriterMessageFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithCodeWriterMessageFilterServiceButton"
                     Grid.Column="1"
@@ -523,7 +523,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.MetadataProviderServices}"
                     Text="{Binding Path=UserSettings.MetadataProviderService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithMetadataProviderServiceButton"
                     Grid.Column="1"
@@ -556,7 +556,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.MetadataProviderQueryServices}"
                     Text="{Binding Path=UserSettings.MetadataProviderQueryService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithMetadataProviderQueryServiceButton"
                     Grid.Column="1"
@@ -589,7 +589,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.CodeGenerationServices}"
                     Text="{Binding Path=UserSettings.CodeGenerationService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithCodeGenerationServiceButton"
                     Grid.Column="1"
@@ -622,7 +622,7 @@
                     IsEditable="True"
                     ItemsSource="{Binding Path=UserSettings.NamingServices}"
                     Text="{Binding Path=UserSettings.NamingService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                    ToolTip="Example : " />
                 <Button
                     x:Name="OpenFileWithNamingServiceButton"
                     Grid.Column="1"
