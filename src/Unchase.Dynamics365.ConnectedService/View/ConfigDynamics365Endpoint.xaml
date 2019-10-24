@@ -21,7 +21,7 @@
         HorizontalAlignment="Stretch"
         VerticalAlignment="Top">
         <DockPanel HorizontalAlignment="Right">
-            <TextBlock Margin="5,8,5,5" Text="Report a bug :" />
+            <TextBlock Margin="5,8,5,5" Text="Report a bug : " />
             <Button
                 x:Name="ReportABugButton"
                 Width="23"
@@ -42,7 +42,7 @@
         <TextBlock
             Margin="0,0,10,5"
             FontWeight="Bold"
-            Text="Generating Language (the language to use for the generated proxy code) :"
+            Text="Generating Language (the language to use for the generated proxy code) : "
             TextWrapping="WrapWithOverflow" />
         <ComboBox
             x:Name="LanguageOption"
@@ -54,7 +54,7 @@
             Margin="0,5,10,5"
             HorizontalAlignment="Stretch"
             FontWeight="Bold"
-            Text="Service name :"
+            Text="Service name : "
             TextWrapping="WrapWithOverflow" />
         <TextBox
             x:Name="ServiceName"
@@ -66,7 +66,7 @@
             Margin="0,5,10,5"
             HorizontalAlignment="Stretch"
             FontWeight="Bold"
-            Text="Dynamics 365 service URI (a url or path to the SDK endpoint to contact for metadata) :"
+            Text="Dynamics 365 service URI (a url or path to the SDK endpoint to contact for metadata) : "
             TextWrapping="WrapWithOverflow" />
 
         <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
@@ -267,7 +267,7 @@
                 <TextBlock
                     Margin="0,5,10,5"
                     HorizontalAlignment="Stretch"
-                    Text="Connection String wich contains information, provided as a single string, for connecting to a Dynamics 365 organization (if provided, all other connect info is ignored) : "
+                    Text="Connection String which contains information, provided as a single string, for connecting to a Dynamics 365 organization (if provided, all other connect info is ignored) : "
                     TextWrapping="WrapWithOverflow" />
                 <TextBox
                     x:Name="ConnectionString"
@@ -308,7 +308,7 @@
                             Width="80"
                             Margin="0,5,10,5"
                             HorizontalAlignment="Left"
-                            Text="UserName :"
+                            Text="UserName : "
                             TextWrapping="WrapWithOverflow" />
                         <TextBox
                             x:Name="NetworkCredentialsUserName"
@@ -322,7 +322,7 @@
                             Width="80"
                             Margin="0,5,10,5"
                             HorizontalAlignment="Left"
-                            Text="Password :"
+                            Text="Password : "
                             TextWrapping="WrapWithOverflow" />
                         <PasswordBox
                             x:Name="NetworkCredentialsPassword"
@@ -344,7 +344,7 @@
                             Width="80"
                             Margin="0,5,10,5"
                             HorizontalAlignment="Left"
-                            Text="Domain :"
+                            Text="Domain : "
                             TextWrapping="WrapWithOverflow" />
                         <TextBox
                             x:Name="NetworkCredentialsDomain"
@@ -354,6 +354,289 @@
                     </DockPanel>
                 </StackPanel>
             </StackPanel>
+        </StackPanel>
+
+
+
+
+
+        <TextBlock
+            Margin="0,10,10,5"
+            HorizontalAlignment="Stretch"
+            TextWrapping="WrapWithOverflow">
+            <Bold>Generation Customization</Bold>
+            (<Hyperlink
+                Name="GenerationCustomizationHyperlink"
+                Command="{StaticResource StackPanelChangeVisibilityCommand}"
+                CommandParameter="{Binding ElementName=GenerationCustomizationPanel}">
+                <TextBlock
+                    Name="GenerationCustomizationHyperlinkText"
+                    Text="{Binding ElementName=GenerationCustomizationPanel, Path=Visibility, Converter={StaticResource VisibilityToHyperlinkTextConverter}}"
+                    TextWrapping="WrapWithOverflow" />
+            </Hyperlink>
+            )</TextBlock>
+        <StackPanel
+            x:Name="GenerationCustomizationPanel"
+            Margin="20,5,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Visibility="Collapsed">
+
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Right"
+                    Text="Try to load all from a single dll-file : " />
+                <Button
+                    x:Name="OpenFileWithAllServicesButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithAllServicesButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICustomizeCodeDomService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CustomizeCodeDomServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.CustomizeCodeDomServices}"
+                    Text="{Binding Path=UserSettings.CustomizeCodeDomService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithCustomizeCodeDomServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCustomizeCodeDomServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeWriterFilterService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeWriterFilterServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.CodeWriterFilterServices}"
+                    Text="{Binding Path=UserSettings.CodeWriterFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithCodeWriterFilterServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeWriterFilterServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeWriterMessageFilterService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeWriterMessageFilterServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.CodeWriterMessageFilterServices}"
+                    Text="{Binding Path=UserSettings.CodeWriterMessageFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithCodeWriterMessageFilterServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeWriterMessageFilterServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the IMetadataProviderService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="MetadataProviderServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.MetadataProviderServices}"
+                    Text="{Binding Path=UserSettings.MetadataProviderService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithMetadataProviderServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithMetadataProviderServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the IMetaDataProviderQueryService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="MetadataProviderQueryServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.MetadataProviderQueryServices}"
+                    Text="{Binding Path=UserSettings.MetadataProviderQueryService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithMetadataProviderQueryServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithMetadataProviderQueryServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeGenerationService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeGenerationServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.CodeGenerationServices}"
+                    Text="{Binding Path=UserSettings.CodeGenerationService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithCodeGenerationServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeGenerationServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the INamingService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="NamingServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="True"
+                    ItemsSource="{Binding Path=UserSettings.NamingServices}"
+                    Text="{Binding Path=UserSettings.NamingService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
+                    ToolTip="Example : http://localhost/Organization1/XRMServices/2011/Organization.svc" />
+                <Button
+                    x:Name="OpenFileWithNamingServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithNamingServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+            </Grid>
+
         </StackPanel>
     </StackPanel>
 </UserControl>

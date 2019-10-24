@@ -106,9 +106,6 @@
     <Compile Include="View\CRMInteractiveLogin.xaml.cs">
       <DependentUpon>CRMInteractiveLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomizationDynamics365Window.xaml.cs">
-      <DependentUpon>CustomizationDynamics365Window.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Wizard.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,10 +186,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CRMInteractiveLogin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CustomizationDynamics365Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
