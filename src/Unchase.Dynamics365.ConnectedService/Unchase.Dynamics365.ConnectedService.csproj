@@ -114,14 +114,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CrmSdk.CoreAssemblies">
-      <Version>9.0.2.19</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CrmSdk.XrmTooling.CoreAssembly">
-      <Version>9.1.0.17</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.CrmSdk.XrmTooling.WpfControls.WithResources">
-      <Version>9.1.0.17</Version>
+      <Version>9.1.0.21</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.ConnectedServices">
       <Version>15.3.47</Version>
@@ -132,13 +126,16 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="NuGet.VisualStudio">
-      <Version>5.3.0</Version>
+      <Version>5.3.1</Version>
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager">
       <Version>4.6.0</Version>
     </PackageReference>
     <PackageReference Include="System.Data.Common">
       <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Unchase.Dynamics365.Customization">
+      <Version>1.0.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -167,12 +164,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Unchase.Dynamics365.Customization\Unchase.Dynamics365.Customization.csproj">
-      <Project>{4498142d-910d-4bfd-b10a-2692bef66d67}</Project>
-      <Name>Unchase.Dynamics365.Customization</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

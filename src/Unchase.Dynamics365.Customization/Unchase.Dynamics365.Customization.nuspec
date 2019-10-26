@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <license type="expression">Apache-2.0</license>
+    <icon>images\icon.png</icon>
+    <projectUrl>https://github.com/unchase/Unchase.Dynamics365.ConnectedService</projectUrl>
+    <language>en-US</language>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>First version.</releaseNotes>
+    <copyright>Copyright © Unchase 2019</copyright>
+    <tags>Dynamics365 D365 CRM DynamicsCRM Customization</tags>
+  </metadata>
+  <files>
+    <file src="..\$id$\images\icon.png" target="images\" />
+  </files>
+</package>
