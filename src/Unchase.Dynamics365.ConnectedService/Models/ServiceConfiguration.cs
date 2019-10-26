@@ -34,6 +34,23 @@
         public bool GenerateCustomActions { get; set; }
 
         public bool OpenGeneratedFilesOnComplete { get; set; }
+
+        #region Customization
+        public string CustomizeCodeDomService { get; set; }
+
+        public string CodeWriterFilterService { get; set; }
+
+        public string CodeWriterMessageFilterService { get; set; }
+
+        public string MetadataProviderService { get; set; }
+
+        public string MetadataProviderQueryService { get; set; }
+
+        public string CodeGenerationService { get; set; }
+
+        public string NamingService { get; set; }
+        #endregion
+
         #endregion
 
         #region Network Credentials

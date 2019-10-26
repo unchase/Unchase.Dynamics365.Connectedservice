@@ -52,6 +52,13 @@ namespace Unchase.Dynamics365.ConnectedService
                 ConfigDynamics365EndpointViewModel.GenerateMessages = serviceConfig.GenerateMessages;
                 ConfigDynamics365EndpointViewModel.MessageNamespace = serviceConfig.MessageNamespace;
                 ConfigDynamics365EndpointViewModel.GenerateCustomActions = serviceConfig.GenerateCustomActions;
+                ConfigDynamics365EndpointViewModel.CustomizeCodeDomService = serviceConfig.CustomizeCodeDomService;
+                ConfigDynamics365EndpointViewModel.CodeWriterFilterService = serviceConfig.CodeWriterFilterService;
+                ConfigDynamics365EndpointViewModel.CodeWriterMessageFilterService = serviceConfig.CodeWriterMessageFilterService;
+                ConfigDynamics365EndpointViewModel.MetadataProviderService = serviceConfig.MetadataProviderService;
+                ConfigDynamics365EndpointViewModel.MetadataProviderQueryService = serviceConfig.MetadataProviderQueryService;
+                ConfigDynamics365EndpointViewModel.CodeGenerationService = serviceConfig.CodeGenerationService;
+                ConfigDynamics365EndpointViewModel.NamingService = serviceConfig.NamingService;
                 ConfigDynamics365EndpointViewModel.NetworkCredentialsDomain = serviceConfig.NetworkCredentialsDomain;
                 ConfigDynamics365EndpointViewModel.NetworkCredentialsUserName = serviceConfig.NetworkCredentialsUserName;
                 ConfigDynamics365EndpointViewModel.NetworkCredentialsPassword = serviceConfig.NetworkCredentialsPassword;
@@ -113,6 +120,13 @@ namespace Unchase.Dynamics365.ConnectedService
                 MessageNamespace = ConfigDynamics365EndpointViewModel.UserSettings.MessageNamespace,
                 GenerateCustomActions = ConfigDynamics365EndpointViewModel.UserSettings.GenerateCustomActions,
                 UseNetworkCredentials = ConfigDynamics365EndpointViewModel.UserSettings.UseNetworkCredentials,
+                CustomizeCodeDomService = ConfigDynamics365EndpointViewModel.UserSettings.CustomizeCodeDomService,
+                CodeWriterFilterService = ConfigDynamics365EndpointViewModel.UserSettings.CodeWriterFilterService,
+                CodeWriterMessageFilterService = ConfigDynamics365EndpointViewModel.UserSettings.CodeWriterMessageFilterService,
+                MetadataProviderService = ConfigDynamics365EndpointViewModel.UserSettings.MetadataProviderService,
+                MetadataProviderQueryService = ConfigDynamics365EndpointViewModel.UserSettings.MetadataProviderQueryService,
+                CodeGenerationService = ConfigDynamics365EndpointViewModel.UserSettings.CodeGenerationService,
+                NamingService = ConfigDynamics365EndpointViewModel.UserSettings.NamingService,
                 OpenGeneratedFilesOnComplete = ConfigDynamics365EndpointViewModel.UserSettings.OpenGeneratedFilesOnComplete
             };
         }

@@ -72,6 +72,30 @@ namespace Unchase.Dynamics365.ConnectedService.Models
 
         [DataMember]
         public bool UseNetworkCredentials { get; set; } = false;
+
+        #region Customization
+        //[DataMember]
+        public string CustomizeCodeDomService { get; set; }
+
+        //[DataMember]
+        public string CodeWriterFilterService { get; set; }
+
+        //[DataMember]
+        public string CodeWriterMessageFilterService { get; set; }
+
+        //[DataMember]
+        public string MetadataProviderService { get; set; }
+
+        //[DataMember]
+        public string MetadataProviderQueryService { get; set; }
+
+        //[DataMember]
+        public string CodeGenerationService { get; set; }
+
+        //[DataMember]
+        public string NamingService { get; set; }
+        #endregion
+
         #endregion
 
         #region Constructors

@@ -135,7 +135,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration
                 if (serviceConfiguration.UseInteractiveLogin)
                     result.Add($"/il");
             }
-            
+
             if (!string.IsNullOrWhiteSpace(serviceConfiguration.Namespace))
                 result.Add($"/namespace:{serviceConfiguration.Namespace}");
             if (serviceConfiguration.GenerateMessages)
@@ -147,7 +147,23 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration
             if (!string.IsNullOrWhiteSpace(serviceConfiguration.ServiceContextName))
                 result.Add($"/serviceContextName:{serviceConfiguration.ServiceContextName}");
 
-            //ToDo: добавить остальные параметры (от интерфейсов)
+            #region Customization
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.CustomizeCodeDomService))
+                result.Add($"/codecustomization:{serviceConfiguration.CustomizeCodeDomService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.CodeWriterFilterService))
+                result.Add($"/codewriterfilter:{serviceConfiguration.CodeWriterFilterService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.CodeWriterMessageFilterService))
+                result.Add($"/codewritermessagefilter:{serviceConfiguration.CodeWriterMessageFilterService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.MetadataProviderService))
+                result.Add($"/metadataproviderservice:{serviceConfiguration.MetadataProviderService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.MetadataProviderQueryService))
+                result.Add($"/metadataproviderqueryservice:{serviceConfiguration.MetadataProviderQueryService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.CodeGenerationService))
+                result.Add($"/codegenerationservice:{serviceConfiguration.CodeGenerationService}");
+            if (!string.IsNullOrWhiteSpace(serviceConfiguration.NamingService))
+                result.Add($"/namingservice:{serviceConfiguration.NamingService}");
+            #endregion
+
             #endregion
 
             return result.ToArray();

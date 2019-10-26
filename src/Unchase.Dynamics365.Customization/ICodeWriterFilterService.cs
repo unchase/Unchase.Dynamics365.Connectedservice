@@ -12,12 +12,12 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Returns true to generate code for the OptionSet and false otherwise.
 		/// </summary>
-        bool GenerateOptionSet(OptionSetMetadataBase optionSetMetadata, IServiceProvider services);
+        Task<bool> GenerateOptionSetAsync(OptionSetMetadataBase optionSetMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns true to generate code for the Option and false otherwise.
 		/// </summary>
-        bool GenerateOption(OptionMetadata optionMetadata, IServiceProvider services);
+        Task<bool> GenerateOptionAsync(OptionMetadata optionMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns true to generate code for the Entity and false otherwise.
@@ -27,7 +27,7 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Returns true to generate code for the Attribute and false otherwise.
 		/// </summary>
-        bool GenerateAttribute(AttributeMetadata attributeMetadata, IServiceProvider services);
+        Task<bool> GenerateAttributeAsync(AttributeMetadata attributeMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns true to generate code for the 1:N, N:N, or N:1 relationship and false otherwise.
@@ -37,6 +37,6 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Returns true to generate code for the data context and false otherwise.
 		/// </summary>
-        bool GenerateServiceContext(IServiceProvider services);
+        Task<bool> GenerateServiceContextAsync(IServiceProvider services);
 	}
 }

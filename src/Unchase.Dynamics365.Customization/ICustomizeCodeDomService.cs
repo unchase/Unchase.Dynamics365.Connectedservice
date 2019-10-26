@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Threading.Tasks;
 
 namespace Unchase.Dynamics365.Customization
 {
@@ -11,6 +12,6 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Customize the generated types before code is generated
 		/// </summary>
-        void CustomizeCodeDom(CodeCompileUnit codeUnit, IServiceProvider services);
+        Task CustomizeCodeDomAsync(CodeCompileUnit codeUnit, IServiceProvider services);
 	}
 }

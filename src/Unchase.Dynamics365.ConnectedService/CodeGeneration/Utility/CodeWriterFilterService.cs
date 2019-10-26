@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk.Metadata;
 using Unchase.Dynamics365.Customization;
@@ -21,14 +22,18 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			this._generateServiceContext = !string.IsNullOrWhiteSpace(parameters.ServiceContextName);
 		}
 
-		bool ICodeWriterFilterService.GenerateOptionSet(OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
+		async Task<bool> ICodeWriterFilterService.GenerateOptionSetAsync(OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
 		{
-			return optionSetMetadata.OptionSetType != null && optionSetMetadata.OptionSetType.Value == OptionSetType.State;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return optionSetMetadata.OptionSetType != null && optionSetMetadata.OptionSetType.Value == OptionSetType.State;
 		}
 
-		bool ICodeWriterFilterService.GenerateOption(OptionMetadata option, IServiceProvider services)
+		async Task<bool> ICodeWriterFilterService.GenerateOptionAsync(OptionMetadata option, IServiceProvider services)
 		{
-			return true;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return true;
 		}
 
 		async Task<bool> ICodeWriterFilterService.GenerateEntityAsync(EntityMetadata entityMetadata, IServiceProvider services)
@@ -79,9 +84,11 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			return false;
 		}
 
-		bool ICodeWriterFilterService.GenerateAttribute(AttributeMetadata attributeMetadata, IServiceProvider services)
+		async Task<bool> ICodeWriterFilterService.GenerateAttributeAsync(AttributeMetadata attributeMetadata, IServiceProvider services)
 		{
-			return !this.IsNotExposedChildAttribute(attributeMetadata) && (attributeMetadata.IsValidForCreate.GetValueOrDefault() || attributeMetadata.IsValidForRead.GetValueOrDefault() || attributeMetadata.IsValidForUpdate.GetValueOrDefault());
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return !this.IsNotExposedChildAttribute(attributeMetadata) && (attributeMetadata.IsValidForCreate.GetValueOrDefault() || attributeMetadata.IsValidForRead.GetValueOrDefault() || attributeMetadata.IsValidForUpdate.GetValueOrDefault());
 		}
 
 		/// <summary>
@@ -98,19 +105,27 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			return otherEntityMetadata != null && !string.Equals(otherEntityMetadata.LogicalName, "calendarrule", StringComparison.Ordinal) && await codeWriterFilterService.GenerateEntityAsync(otherEntityMetadata, services);
 		}
 
-		bool ICodeWriterFilterService.GenerateServiceContext(IServiceProvider services)
+        async Task<bool> ICodeWriterFilterService.GenerateServiceContextAsync(IServiceProvider services)
 		{
-			return this._generateServiceContext;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return this._generateServiceContext;
 		}
 
-		bool ICodeWriterMessageFilterService.GenerateSdkMessage(SdkMessage message, IServiceProvider services)
+        async Task<bool> ICodeWriterMessageFilterService.GenerateSdkMessageAsync(SdkMessage message,
+            IServiceProvider services)
 		{
-			return (this._generateMessages || this._generateCustomActions) && !message.IsPrivate && message.SdkMessageFilters.Count != 0;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return (this._generateMessages || this._generateCustomActions) && !message.IsPrivate && message.SdkMessageFilters.Count != 0;
 		}
 
-		bool ICodeWriterMessageFilterService.GenerateSdkMessagePair(SdkMessagePair messagePair, IServiceProvider services)
+        async Task<bool> ICodeWriterMessageFilterService.GenerateSdkMessagePairAsync(SdkMessagePair messagePair,
+            IServiceProvider services)
 		{
-			return (this._generateMessages || this._generateCustomActions) && !CodeWriterFilterService.ExcludedNamespaces.Contains(messagePair.MessageNamespace.ToUpperInvariant()) && (!this._generateCustomActions || messagePair.Message.IsCustomAction) && (string.IsNullOrEmpty(this._messageNamespace) || string.Equals(this._messageNamespace, messagePair.MessageNamespace, StringComparison.OrdinalIgnoreCase));
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return (this._generateMessages || this._generateCustomActions) && !CodeWriterFilterService.ExcludedNamespaces.Contains(messagePair.MessageNamespace.ToUpperInvariant()) && (!this._generateCustomActions || messagePair.Message.IsCustomAction) && (string.IsNullOrEmpty(this._messageNamespace) || string.Equals(this._messageNamespace, messagePair.MessageNamespace, StringComparison.OrdinalIgnoreCase));
 		}
 
 		private static readonly List<string> ExcludedNamespaces = new List<string>();

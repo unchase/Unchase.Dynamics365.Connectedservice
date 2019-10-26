@@ -28,39 +28,60 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForOptionSet(EntityMetadata entityMetadata, OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForOptionSetAsync(EntityMetadata entityMetadata,
+            OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
 		{
-			return CodeGenerationType.Enum;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Enum;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForOption(OptionSetMetadataBase optionSetMetadata, OptionMetadata optionMetadata, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForOptionAsync(OptionSetMetadataBase optionSetMetadata,
+            OptionMetadata optionMetadata, IServiceProvider services)
 		{
-			return CodeGenerationType.Field;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Field;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForEntity(EntityMetadata entityMetadata, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForEntityAsync(EntityMetadata entityMetadata,
+            IServiceProvider services)
 		{
-			return CodeGenerationType.Class;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Class;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForAttribute(EntityMetadata entityMetadata, AttributeMetadata attributeMetadata, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForAttributeAsync(EntityMetadata entityMetadata,
+            AttributeMetadata attributeMetadata, IServiceProvider services)
 		{
-			return CodeGenerationType.Property;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Property;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForMessagePair(SdkMessagePair messagePair, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForMessagePairAsync(SdkMessagePair messagePair,
+            IServiceProvider services)
 		{
-			return CodeGenerationType.Class;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Class;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForRequestField(SdkMessageRequest request, SdkMessageRequestField requestField, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForRequestFieldAsync(SdkMessageRequest request,
+            SdkMessageRequestField requestField, IServiceProvider services)
 		{
-			return CodeGenerationType.Property;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Property;
 		}
 
-		CodeGenerationType ICodeGenerationService.GetTypeForResponseField(SdkMessageResponse response, SdkMessageResponseField responseField, IServiceProvider services)
+        async Task<CodeGenerationType> ICodeGenerationService.GetTypeForResponseFieldAsync(SdkMessageResponse response,
+            SdkMessageResponseField responseField, IServiceProvider services)
 		{
-			return CodeGenerationType.Property;
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return CodeGenerationType.Property;
 		}
 
 		private static async Task<CodeNamespace> BuildCodeDomAsync(IOrganizationMetadata organizationMetadata, string outputNamespace, ServiceProvider serviceProvider)
@@ -81,7 +102,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			var codeCompileUnit = new CodeCompileUnit();
 			codeCompileUnit.Namespaces.Add(codeNameSpace);
 			codeCompileUnit.AssemblyCustomAttributes.Add(CodeGenerationService.Attribute(typeof(ProxyTypesAssemblyAttribute)));
-			serviceProvider.CodeCustomizationService.CustomizeCodeDom(codeCompileUnit, serviceProvider);
+			await serviceProvider.CodeCustomizationService.CustomizeCodeDomAsync(codeCompileUnit, serviceProvider);
             var codeGeneratorOptions = new CodeGeneratorOptions
             {
                 BlankLinesBetweenMembers = true, BracingStyle = "C", IndentString = "\t", VerbatimOrder = true
@@ -102,7 +123,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			var codeTypeDeclarationCollection = new CodeTypeDeclarationCollection();
 			foreach (var optionSetMetadataBase in optionSetMetadata)
 			{
-				if (serviceProvider.CodeFilterService.GenerateOptionSet(optionSetMetadataBase, serviceProvider) && optionSetMetadataBase.IsGlobal != null && optionSetMetadataBase.IsGlobal.Value)
+				if (await serviceProvider.CodeFilterService.GenerateOptionSetAsync(optionSetMetadataBase, serviceProvider) && optionSetMetadataBase.IsGlobal != null && optionSetMetadataBase.IsGlobal.Value)
 				{
 					var codeTypeDeclaration = await CodeGenerationService.BuildOptionSetAsync(null, optionSetMetadataBase, serviceProvider);
 					if (codeTypeDeclaration != null)
@@ -126,14 +147,14 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeDeclaration> BuildOptionSetAsync(EntityMetadata entity, OptionSetMetadataBase optionSet, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var codeTypeDeclaration = CodeGenerationService.Enum(serviceProvider.NamingService.GetNameForOptionSet(entity, optionSet, serviceProvider), CodeGenerationService.Attribute(typeof(DataContractAttribute)));
+			var codeTypeDeclaration = CodeGenerationService.Enum(await serviceProvider.NamingService.GetNameForOptionSetAsync(entity, optionSet, serviceProvider), CodeGenerationService.Attribute(typeof(DataContractAttribute)));
             if (!(optionSet is OptionSetMetadata optionSetMetadata))
 			{
 				return null;
 			}
 			foreach (var optionMetadata in optionSetMetadata.Options)
 			{
-				if (serviceProvider.CodeFilterService.GenerateOption(optionMetadata, serviceProvider))
+				if (await serviceProvider.CodeFilterService.GenerateOptionAsync(optionMetadata, serviceProvider))
 				{
 					codeTypeDeclaration.Members.Add(await CodeGenerationService.BuildOptionAsync(optionSet, optionMetadata, serviceProvider));
 				}
@@ -149,7 +170,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildOptionAsync(OptionSetMetadataBase optionSet, OptionMetadata option, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var codeMemberField = CodeGenerationService.Field(serviceProvider.NamingService.GetNameForOption(optionSet, option, serviceProvider), typeof(int), option.Value.Value, CodeGenerationService.Attribute(typeof(EnumMemberAttribute)));
+			var codeMemberField = CodeGenerationService.Field(await serviceProvider.NamingService.GetNameForOptionAsync(optionSet, option, serviceProvider), typeof(int), option.Value.Value, CodeGenerationService.Attribute(typeof(EnumMemberAttribute)));
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}: {1}.Option {2} defined", MethodBase.GetCurrentMethod().Name, optionSet.Name, codeMemberField.Name);
 			return codeMemberField;
 		}
@@ -179,14 +200,14 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
 			var codeTypeDeclarationCollection = new CodeTypeDeclarationCollection();
-			var codeTypeDeclaration = CodeGenerationService.Class(serviceProvider.NamingService.GetNameForEntity(entity, serviceProvider), CodeGenerationService.TypeRef(CodeGenerationService.EntityClassBaseType), CodeGenerationService.Attribute(typeof(DataContractAttribute)), CodeGenerationService.Attribute(CodeGenerationService.EntityLogicalNameAttribute, CodeGenerationService.AttributeArg(entity.LogicalName)));
+			var codeTypeDeclaration = CodeGenerationService.Class(await serviceProvider.NamingService.GetNameForEntityAsync(entity, serviceProvider), CodeGenerationService.TypeRef(CodeGenerationService.EntityClassBaseType), CodeGenerationService.Attribute(typeof(DataContractAttribute)), CodeGenerationService.Attribute(CodeGenerationService.EntityLogicalNameAttribute, CodeGenerationService.AttributeArg(entity.LogicalName)));
 			CodeGenerationService.InitializeEntityClass(codeTypeDeclaration, entity);
 			CodeTypeMember codeTypeMember = null;
 			foreach (var attributeMetadata in from metadata in entity.Attributes
 			orderby metadata.LogicalName
 			select metadata)
 			{
-				if (serviceProvider.CodeFilterService.GenerateAttribute(attributeMetadata, serviceProvider))
+				if (await serviceProvider.CodeFilterService.GenerateAttributeAsync(attributeMetadata, serviceProvider))
 				{
 					codeTypeMember = await CodeGenerationService.BuildAttributeAsync(entity, attributeMetadata, serviceProvider);
 					codeTypeDeclaration.Members.Add(codeTypeMember);
@@ -253,7 +274,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
 			var typeForAttributeType = await serviceProvider.TypeMappingService.GetTypeForAttributeTypeAsync(entity, attribute, serviceProvider);
-			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForAttributeType, serviceProvider.NamingService.GetNameForAttribute(entity, attribute, serviceProvider), Array.Empty<CodeStatement>());
+			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForAttributeType, await serviceProvider.NamingService.GetNameForAttributeAsync(entity, attribute, serviceProvider), Array.Empty<CodeStatement>());
 			codeMemberProperty.HasSet = (attribute.IsValidForCreate.GetValueOrDefault() || attribute.IsValidForUpdate.GetValueOrDefault());
 			codeMemberProperty.HasGet = (attribute.IsValidForRead.GetValueOrDefault() || codeMemberProperty.HasSet);
 			if (codeMemberProperty.HasGet)
@@ -336,7 +357,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.Return(CodeGenerationService.BaseProp("Id")));
 			if (codeMemberProperty.HasSet)
 			{
-				codeMemberProperty.SetStatements.Add(CodeGenerationService.AssignValue(CodeGenerationService.ThisProp(serviceProvider.NamingService.GetNameForAttribute(entity, attribute, serviceProvider)), CodeGenerationService.VarRef("value")));
+				codeMemberProperty.SetStatements.Add(CodeGenerationService.AssignValue(CodeGenerationService.ThisProp(await serviceProvider.NamingService.GetNameForAttributeAsync(entity, attribute, serviceProvider)), CodeGenerationService.VarRef("value")));
 			}
 			else
 			{
@@ -350,7 +371,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
 			var attributeOptionSet = TypeMappingService.GetAttributeOptionSet(attribute);
-			if (attributeOptionSet == null || !serviceProvider.CodeFilterService.GenerateOptionSet(attributeOptionSet, serviceProvider))
+			if (attributeOptionSet == null || !await serviceProvider.CodeFilterService.GenerateOptionSetAsync(attributeOptionSet, serviceProvider))
 			{
 				if (attributeOptionSet != null)
 				{
@@ -411,7 +432,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildCalendarRuleAttributeAsync(EntityMetadata entity, EntityMetadata otherEntity, OneToManyRelationshipMetadata oneToMany, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IEnumerable(serviceProvider.TypeMappingService.GetTypeForRelationship(oneToMany, otherEntity, serviceProvider)), "CalendarRules", Array.Empty<CodeStatement>());
+			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IEnumerable(await serviceProvider.TypeMappingService.GetTypeForRelationshipAsync(oneToMany, otherEntity, serviceProvider)), "CalendarRules", Array.Empty<CodeStatement>());
 			codeMemberProperty.GetStatements.AddRange(CodeGenerationService.BuildEntityCollectionAttributeGet("calendarrules", codeMemberProperty.Type));
 			codeMemberProperty.SetStatements.Add(CodeGenerationService.ThisMethodInvoke("OnPropertyChanging", CodeGenerationService.StringLiteral(codeMemberProperty.Name)));
 			codeMemberProperty.SetStatements.Add(CodeGenerationService.BuildEntityCollectionAttributeSet("calendarrules"));
@@ -457,9 +478,9 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildOneToManyAsync(EntityMetadata entity, EntityMetadata otherEntity, OneToManyRelationshipMetadata oneToMany, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForRelationship = serviceProvider.TypeMappingService.GetTypeForRelationship(oneToMany, otherEntity, serviceProvider);
+			var typeForRelationship = await serviceProvider.TypeMappingService.GetTypeForRelationshipAsync(oneToMany, otherEntity, serviceProvider);
 			var entityRole = (oneToMany.ReferencingEntity == entity.LogicalName) ? new EntityRole?(EntityRole.Referenced) : null;
-			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IEnumerable(typeForRelationship), serviceProvider.NamingService.GetNameForRelationship(entity, oneToMany, entityRole, serviceProvider), Array.Empty<CodeStatement>());
+			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IEnumerable(typeForRelationship), await serviceProvider.NamingService.GetNameForRelationshipAsync(entity, oneToMany, entityRole, serviceProvider), Array.Empty<CodeStatement>());
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.BuildRelationshipGet("GetRelatedEntities", oneToMany, typeForRelationship, entityRole));
 			codeMemberProperty.SetStatements.AddRange(CodeGenerationService.BuildRelationshipSet("SetRelatedEntities", oneToMany, typeForRelationship, codeMemberProperty.Name, entityRole));
 			codeMemberProperty.CustomAttributes.Add(CodeGenerationService.BuildRelationshipSchemaNameAttribute(oneToMany.SchemaName, entityRole));
@@ -488,16 +509,16 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 				{
 					if (entityMetadata.LogicalName != entity.LogicalName)
 					{
-						var nameForRelationship = serviceProvider.NamingService.GetNameForRelationship(entity, manyToManyRelationshipMetadata, null, serviceProvider);
+						var nameForRelationship = await serviceProvider.NamingService.GetNameForRelationshipAsync(entity, manyToManyRelationshipMetadata, null, serviceProvider);
 						var value = await CodeGenerationService.BuildManyToManyAsync(entity, entityMetadata, manyToManyRelationshipMetadata, nameForRelationship, null, serviceProvider);
 						codeTypeMemberCollection.Add(value);
 					}
 					else
 					{
-						var nameForRelationship2 = serviceProvider.NamingService.GetNameForRelationship(entity, manyToManyRelationshipMetadata, EntityRole.Referencing, serviceProvider);
+						var nameForRelationship2 = await serviceProvider.NamingService.GetNameForRelationshipAsync(entity, manyToManyRelationshipMetadata, EntityRole.Referencing, serviceProvider);
 						var value2 = await CodeGenerationService.BuildManyToManyAsync(entity, entityMetadata, manyToManyRelationshipMetadata, nameForRelationship2, EntityRole.Referencing, serviceProvider);
 						codeTypeMemberCollection.Add(value2);
-						var nameForRelationship3 = serviceProvider.NamingService.GetNameForRelationship(entity, manyToManyRelationshipMetadata, EntityRole.Referenced, serviceProvider);
+						var nameForRelationship3 = await serviceProvider.NamingService.GetNameForRelationshipAsync(entity, manyToManyRelationshipMetadata, EntityRole.Referenced, serviceProvider);
 						var value3 = await CodeGenerationService.BuildManyToManyAsync(entity, entityMetadata, manyToManyRelationshipMetadata, nameForRelationship3, EntityRole.Referenced, serviceProvider);
 						codeTypeMemberCollection.Add(value3);
 					}
@@ -513,7 +534,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildManyToManyAsync(EntityMetadata entity, EntityMetadata otherEntity, ManyToManyRelationshipMetadata manyToMany, string propertyName, EntityRole? entityRole, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForRelationship = serviceProvider.TypeMappingService.GetTypeForRelationship(manyToMany, otherEntity, serviceProvider);
+			var typeForRelationship = await serviceProvider.TypeMappingService.GetTypeForRelationshipAsync(manyToMany, otherEntity, serviceProvider);
 			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IEnumerable(typeForRelationship), propertyName, Array.Empty<CodeStatement>());
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.BuildRelationshipGet("GetRelatedEntities", manyToMany, typeForRelationship, entityRole));
 			codeMemberProperty.SetStatements.AddRange(CodeGenerationService.BuildRelationshipSet("SetRelatedEntities", manyToMany, typeForRelationship, propertyName, entityRole));
@@ -558,9 +579,9 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildManyToOneAsync(EntityMetadata entity, EntityMetadata otherEntity, OneToManyRelationshipMetadata manyToOne, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForRelationship = serviceProvider.TypeMappingService.GetTypeForRelationship(manyToOne, otherEntity, serviceProvider);
+			var typeForRelationship = await serviceProvider.TypeMappingService.GetTypeForRelationshipAsync(manyToOne, otherEntity, serviceProvider);
 			var entityRole = (otherEntity.LogicalName == entity.LogicalName) ? new EntityRole?(EntityRole.Referencing) : null;
-			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForRelationship, serviceProvider.NamingService.GetNameForRelationship(entity, manyToOne, entityRole, serviceProvider), Array.Empty<CodeStatement>());
+			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForRelationship, await serviceProvider.NamingService.GetNameForRelationshipAsync(entity, manyToOne, entityRole, serviceProvider), Array.Empty<CodeStatement>());
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.BuildRelationshipGet("GetRelatedEntity", manyToOne, typeForRelationship, entityRole));
 			var attributeMetadata = entity.Attributes.SingleOrDefault(attribute => attribute.LogicalName == manyToOne.ReferencingAttribute);
 			if (attributeMetadata == null)
@@ -617,9 +638,9 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
 			var codeTypeDeclarationCollection = new CodeTypeDeclarationCollection();
-			if (serviceProvider.CodeFilterService.GenerateServiceContext(serviceProvider))
+			if (await serviceProvider.CodeFilterService.GenerateServiceContextAsync(serviceProvider))
 			{
-				var codeTypeDeclaration = CodeGenerationService.Class(serviceProvider.NamingService.GetNameForServiceContext(serviceProvider), CodeGenerationService.ServiceContextBaseType, Array.Empty<CodeAttributeDeclaration>());
+				var codeTypeDeclaration = CodeGenerationService.Class(await serviceProvider.NamingService.GetNameForServiceContextAsync(serviceProvider), CodeGenerationService.ServiceContextBaseType, Array.Empty<CodeAttributeDeclaration>());
 				codeTypeDeclaration.Members.Add(CodeGenerationService.ServiceContextConstructor());
 				codeTypeDeclaration.Comments.AddRange(CodeGenerationService.CommentSummary("Represents a source of entities bound to a CRM service. It tracks and manages changes made to the retrieved entities."));
 				foreach (var entityMetadata2 in from metadata in entityMetadata
@@ -656,8 +677,8 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeMember> BuildEntitySetAsync(EntityMetadata entity, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForEntity = serviceProvider.TypeMappingService.GetTypeForEntity(entity, serviceProvider);
-			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IQueryable(typeForEntity), serviceProvider.NamingService.GetNameForEntitySet(entity, serviceProvider), CodeGenerationService.Return(CodeGenerationService.ThisMethodInvoke("CreateQuery", typeForEntity, Array.Empty<CodeExpression>())));
+			var typeForEntity = await serviceProvider.TypeMappingService.GetTypeForEntityAsync(entity, serviceProvider);
+			var codeMemberProperty = CodeGenerationService.PropertyGet(CodeGenerationService.IQueryable(typeForEntity), await serviceProvider.NamingService.GetNameForEntitySetAsync(entity, serviceProvider), CodeGenerationService.Return(CodeGenerationService.ThisMethodInvoke("CreateQuery", typeForEntity, Array.Empty<CodeExpression>())));
 			codeMemberProperty.Comments.AddRange(CodeGenerationService.CommentSummary(string.Format(CultureInfo.InvariantCulture, "Gets a binding to the set of all <see cref=\"{0}\"/> entities.", typeForEntity.BaseType)));
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}: {1} entity set '{2}' defined", MethodBase.GetCurrentMethod().Name, entity.LogicalName, codeMemberProperty.Name);
 			return codeMemberProperty;
@@ -669,7 +690,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			var codeTypeDeclarationCollection = new CodeTypeDeclarationCollection();
 			foreach (var sdkMessage in sdkMessages.MessageCollection.Values)
 			{
-				if (serviceProvider.CodeMessageFilterService.GenerateSdkMessage(sdkMessage, serviceProvider))
+				if (await serviceProvider.CodeMessageFilterService.GenerateSdkMessageAsync(sdkMessage, serviceProvider))
 				{
 					codeTypeDeclarationCollection.AddRange(await CodeGenerationService.BuildMessageAsync(sdkMessage, serviceProvider));
 				}
@@ -688,7 +709,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			var codeTypeDeclarationCollection = new CodeTypeDeclarationCollection();
 			foreach (var sdkMessagePair in message.SdkMessagePairs.Values)
 			{
-				if (serviceProvider.CodeMessageFilterService.GenerateSdkMessagePair(sdkMessagePair, serviceProvider))
+				if (await serviceProvider.CodeMessageFilterService.GenerateSdkMessagePairAsync(sdkMessagePair, serviceProvider))
 				{
 					codeTypeDeclarationCollection.Add(await CodeGenerationService.BuildMessageRequestAsync(sdkMessagePair, sdkMessagePair.Request, serviceProvider));
 					codeTypeDeclarationCollection.Add(await CodeGenerationService.BuildMessageResponseAsync(sdkMessagePair, sdkMessagePair.Response, serviceProvider));
@@ -705,7 +726,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeDeclaration> BuildMessageRequestAsync(SdkMessagePair messagePair, SdkMessageRequest sdkMessageRequest, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var codeTypeDeclaration = CodeGenerationService.Class(string.Format(CultureInfo.InvariantCulture, "{0}{1}", serviceProvider.NamingService.GetNameForMessagePair(messagePair, serviceProvider), CodeGenerationService.RequestClassSuffix), CodeGenerationService.RequestClassBaseType, CodeGenerationService.Attribute(typeof(DataContractAttribute), CodeGenerationService.AttributeArg("Namespace", messagePair.MessageNamespace)), CodeGenerationService.Attribute(typeof(RequestProxyAttribute), CodeGenerationService.AttributeArg(null, messagePair.Request.Name)));
+			var codeTypeDeclaration = CodeGenerationService.Class(string.Format(CultureInfo.InvariantCulture, "{0}{1}", await serviceProvider.NamingService.GetNameForMessagePairAsync(messagePair, serviceProvider), CodeGenerationService.RequestClassSuffix), CodeGenerationService.RequestClassBaseType, CodeGenerationService.Attribute(typeof(DataContractAttribute), CodeGenerationService.AttributeArg("Namespace", messagePair.MessageNamespace)), CodeGenerationService.Attribute(typeof(RequestProxyAttribute), CodeGenerationService.AttributeArg(null, messagePair.Request.Name)));
 			var flag = false;
 			var codeStatementCollection = new CodeStatementCollection();
 			if (sdkMessageRequest.RequestFields != null & sdkMessageRequest.RequestFields?.Count > 0)
@@ -751,7 +772,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeTypeDeclaration> BuildMessageResponseAsync(SdkMessagePair messagePair, SdkMessageResponse sdkMessageResponse, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var codeTypeDeclaration = CodeGenerationService.Class(string.Format(CultureInfo.InvariantCulture, "{0}{1}", serviceProvider.NamingService.GetNameForMessagePair(messagePair, serviceProvider), CodeGenerationService.ResponseClassSuffix), CodeGenerationService.ResponseClassBaseType, CodeGenerationService.Attribute(typeof(DataContractAttribute), CodeGenerationService.AttributeArg("Namespace", messagePair.MessageNamespace)), CodeGenerationService.Attribute(typeof(ResponseProxyAttribute), CodeGenerationService.AttributeArg(null, messagePair.Request.Name)));
+			var codeTypeDeclaration = CodeGenerationService.Class(string.Format(CultureInfo.InvariantCulture, "{0}{1}", await serviceProvider.NamingService.GetNameForMessagePairAsync(messagePair, serviceProvider), CodeGenerationService.ResponseClassSuffix), CodeGenerationService.ResponseClassBaseType, CodeGenerationService.Attribute(typeof(DataContractAttribute), CodeGenerationService.AttributeArg("Namespace", messagePair.MessageNamespace)), CodeGenerationService.Attribute(typeof(ResponseProxyAttribute), CodeGenerationService.AttributeArg(null, messagePair.Request.Name)));
 			codeTypeDeclaration.Members.Add(CodeGenerationService.Constructor(Array.Empty<CodeExpression>()));
 			if (sdkMessageResponse != null && (sdkMessageResponse.ResponseFields != null & sdkMessageResponse.ResponseFields?.Count > 0))
 			{
@@ -774,8 +795,8 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeMemberProperty> BuildRequestFieldAsync(SdkMessageRequest request, SdkMessageRequestField field, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForRequestField = serviceProvider.TypeMappingService.GetTypeForRequestField(field, serviceProvider);
-			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForRequestField, serviceProvider.NamingService.GetNameForRequestField(request, field, serviceProvider), Array.Empty<CodeStatement>());
+			var typeForRequestField = await serviceProvider.TypeMappingService.GetTypeForRequestFieldAsync(field, serviceProvider);
+			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForRequestField, await serviceProvider.NamingService.GetNameForRequestFieldAsync(request, field, serviceProvider), Array.Empty<CodeStatement>());
 			codeMemberProperty.HasSet = true;
 			codeMemberProperty.HasGet = true;
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.BuildRequestFieldGetStatement(field, typeForRequestField));
@@ -797,8 +818,8 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 		private static async Task<CodeMemberProperty> BuildResponseFieldAsync(SdkMessageResponse response, SdkMessageResponseField field, ServiceProvider serviceProvider)
 		{
             await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
-			var typeForResponseField = serviceProvider.TypeMappingService.GetTypeForResponseField(field, serviceProvider);
-			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForResponseField, serviceProvider.NamingService.GetNameForResponseField(response, field, serviceProvider), Array.Empty<CodeStatement>());
+			var typeForResponseField = await serviceProvider.TypeMappingService.GetTypeForResponseFieldAsync(field, serviceProvider);
+			var codeMemberProperty = CodeGenerationService.PropertyGet(typeForResponseField, await serviceProvider.NamingService.GetNameForResponseFieldAsync(response, field, serviceProvider), Array.Empty<CodeStatement>());
 			codeMemberProperty.HasSet = false;
 			codeMemberProperty.HasGet = true;
 			codeMemberProperty.GetStatements.Add(CodeGenerationService.BuildResponseFieldGetStatement(field, typeForResponseField));

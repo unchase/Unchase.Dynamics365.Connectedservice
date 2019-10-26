@@ -22,36 +22,36 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Returns the type that gets generated for the OptionSetMetadata
 		/// </summary>
-        CodeGenerationType GetTypeForOptionSet(EntityMetadata entityMetadata, OptionSetMetadataBase optionSetMetadata, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForOptionSetAsync(EntityMetadata entityMetadata, OptionSetMetadataBase optionSetMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the Option
 		/// </summary>
-        CodeGenerationType GetTypeForOption(OptionSetMetadataBase optionSetMetadata, OptionMetadata optionMetadata, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForOptionAsync(OptionSetMetadataBase optionSetMetadata, OptionMetadata optionMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the EntityMetadata
 		/// </summary>
-        CodeGenerationType GetTypeForEntity(EntityMetadata entityMetadata, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForEntityAsync(EntityMetadata entityMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the AttributeMetadata
 		/// </summary>
-        CodeGenerationType GetTypeForAttribute(EntityMetadata entityMetadata, AttributeMetadata attributeMetadata, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForAttributeAsync(EntityMetadata entityMetadata, AttributeMetadata attributeMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the SdkMessagePair
 		/// </summary>
-        CodeGenerationType GetTypeForMessagePair(SdkMessagePair messagePair, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForMessagePairAsync(SdkMessagePair messagePair, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the SdkMessageRequestField
 		/// </summary>
-        CodeGenerationType GetTypeForRequestField(SdkMessageRequest request, SdkMessageRequestField requestField, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForRequestFieldAsync(SdkMessageRequest request, SdkMessageRequestField requestField, IServiceProvider services);
 
 		/// <summary>
 		/// Returns the type that gets generated for the SdkMessageResponseField
 		/// </summary>
-        CodeGenerationType GetTypeForResponseField(SdkMessageResponse response, SdkMessageResponseField responseField, IServiceProvider services);
+        Task<CodeGenerationType> GetTypeForResponseFieldAsync(SdkMessageResponse response, SdkMessageResponseField responseField, IServiceProvider services);
 	}
 }

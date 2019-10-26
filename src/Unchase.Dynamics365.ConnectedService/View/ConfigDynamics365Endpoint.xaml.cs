@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -42,7 +43,7 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 {
                     if (assemblyType.GetInterfaces().Any(i => i.FullName == typeof(T).FullName))
                     {
-                        result.Add($"{assemblyType.FullName}, {assemblyType.Assembly.GetName().Name}");
+                        result.Add($"{assemblyType.FullName}, {assemblyType.Assembly.GetName().FullName}");
                     }
                 }
             }
@@ -87,8 +88,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    CustomizeCodeDomServices.ItemsSource = GetClassesImplementsInterface<ICustomizeCodeDomService>(assembly);
+                    var classes = GetClassesImplementsInterface<ICustomizeCodeDomService>(assembly);
+                    CustomizeCodeDomServices.ItemsSource = classes;
                     CustomizeCodeDomServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(ICustomizeCodeDomService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -105,8 +108,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    CodeWriterFilterServices.ItemsSource = GetClassesImplementsInterface<ICodeWriterFilterService>(assembly);
+                    var classes = GetClassesImplementsInterface<ICodeWriterFilterService>(assembly);
+                    CodeWriterFilterServices.ItemsSource = classes;
                     CodeWriterFilterServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(ICodeWriterFilterService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -123,8 +128,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    CodeWriterMessageFilterServices.ItemsSource = GetClassesImplementsInterface<ICodeWriterMessageFilterService>(assembly);
+                    var classes = GetClassesImplementsInterface<ICodeWriterMessageFilterService>(assembly);
+                    CodeWriterMessageFilterServices.ItemsSource = classes;
                     CodeWriterMessageFilterServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(ICodeWriterMessageFilterService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -141,8 +148,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    MetadataProviderServices.ItemsSource = GetClassesImplementsInterface<IMetadataProviderService>(assembly);
+                    var classes = GetClassesImplementsInterface<IMetadataProviderService>(assembly);
+                    MetadataProviderServices.ItemsSource = classes;
                     MetadataProviderServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(IMetadataProviderService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -159,8 +168,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    MetadataProviderQueryServices.ItemsSource = GetClassesImplementsInterface<IMetadataProviderQueryService>(assembly);
+                    var classes = GetClassesImplementsInterface<IMetadataProviderQueryService>(assembly);
+                    MetadataProviderQueryServices.ItemsSource = classes;
                     MetadataProviderQueryServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(IMetadataProviderQueryService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -177,8 +188,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    CodeGenerationServices.ItemsSource = GetClassesImplementsInterface<ICodeGenerationService>(assembly);
+                    var classes = GetClassesImplementsInterface<ICodeGenerationService>(assembly);
+                    CodeGenerationServices.ItemsSource = classes;
                     CodeGenerationServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(ICodeGenerationService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -195,8 +208,10 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    NamingServices.ItemsSource = GetClassesImplementsInterface<INamingService>(assembly);
+                    var classes = GetClassesImplementsInterface<INamingService>(assembly);
+                    NamingServices.ItemsSource = classes;
                     NamingServices.SelectedIndex = 0;
+                    MessageBox.Show($"Loaded assembly with {classes.Count} classes implements {nameof(INamingService)}", "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -213,26 +228,85 @@ namespace Unchase.Dynamics365.ConnectedService.View
                 try
                 {
                     var assembly = Assembly.LoadFrom(filePath);
-                    CustomizeCodeDomServices.ItemsSource = GetClassesImplementsInterface<ICustomizeCodeDomService>(assembly);
+                    var customizeCodeDomServicesClasses = GetClassesImplementsInterface<ICustomizeCodeDomService>(assembly);
+                    CustomizeCodeDomServices.ItemsSource = customizeCodeDomServicesClasses;
                     CustomizeCodeDomServices.SelectedIndex = 0;
-                    CodeWriterFilterServices.ItemsSource = GetClassesImplementsInterface<ICodeWriterFilterService>(assembly);
+                    var codeWriterFilterServicesClasses = GetClassesImplementsInterface<ICodeWriterFilterService>(assembly);
+                    CodeWriterFilterServices.ItemsSource = codeWriterFilterServicesClasses;
                     CodeWriterFilterServices.SelectedIndex = 0;
-                    CodeWriterMessageFilterServices.ItemsSource = GetClassesImplementsInterface<ICodeWriterMessageFilterService>(assembly);
+                    var codeWriterMessageFilterServicesClasses = GetClassesImplementsInterface<ICodeWriterMessageFilterService>(assembly);
+                    CodeWriterMessageFilterServices.ItemsSource = codeWriterMessageFilterServicesClasses;
                     CodeWriterMessageFilterServices.SelectedIndex = 0;
-                    MetadataProviderServices.ItemsSource = GetClassesImplementsInterface<IMetadataProviderService>(assembly);
+                    var metadataProviderServicesClasses = GetClassesImplementsInterface<IMetadataProviderService>(assembly);
+                    MetadataProviderServices.ItemsSource = metadataProviderServicesClasses;
                     MetadataProviderServices.SelectedIndex = 0;
-                    MetadataProviderQueryServices.ItemsSource = GetClassesImplementsInterface<IMetadataProviderQueryService>(assembly);
+                    var metadataProviderQueryServicesClasses = GetClassesImplementsInterface<IMetadataProviderQueryService>(assembly);
+                    MetadataProviderQueryServices.ItemsSource = metadataProviderQueryServicesClasses;
                     MetadataProviderQueryServices.SelectedIndex = 0;
-                    CodeGenerationServices.ItemsSource = GetClassesImplementsInterface<ICodeGenerationService>(assembly);
+                    var codeGenerationServices = GetClassesImplementsInterface<ICodeGenerationService>(assembly);
+                    CodeGenerationServices.ItemsSource = codeGenerationServices;
                     CodeGenerationServices.SelectedIndex = 0;
-                    NamingServices.ItemsSource = GetClassesImplementsInterface<INamingService>(assembly);
+                    var mamingServicesClasses = GetClassesImplementsInterface<INamingService>(assembly);
+                    NamingServices.ItemsSource = mamingServicesClasses;
                     NamingServices.SelectedIndex = 0;
+                    MessageBox.Show(
+                        $"Loaded assembly with :\n" +
+                        $"\t{customizeCodeDomServicesClasses.Count} classes implements {nameof(ICustomizeCodeDomService)}\n" +
+                        $"\t{codeWriterFilterServicesClasses.Count} classes implements {nameof(ICodeWriterFilterService)}\n" +
+                        $"\t{codeWriterMessageFilterServicesClasses.Count} classes implements {nameof(ICodeWriterMessageFilterService)}\n" +
+                        $"\t{metadataProviderServicesClasses.Count} classes implements {nameof(ICodeWriterMessageFilterService)}\n" +
+                        $"\t{metadataProviderQueryServicesClasses.Count} classes implements {nameof(IMetadataProviderService)}\n" +
+                        $"\t{codeGenerationServices.Count} classes implements {nameof(ICodeGenerationService)}\n" +
+                        $"\t{mamingServicesClasses.Count} classes implements {nameof(INamingService)}"
+                        , "Load assembly", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"{ex.Message}", "Load assembly data error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void ClearCustomizeCodeDomServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            CustomizeCodeDomServices.ItemsSource = new List<string>();
+            CustomizeCodeDomServices.Text = string.Empty;
+        }
+
+        private void ClearCodeWriterFilterServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            CodeWriterFilterServices.ItemsSource = new List<string>();
+            CodeWriterFilterServices.Text = string.Empty;
+        }
+
+        private void ClearCodeWriterMessageFilterServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            CodeWriterMessageFilterServices.ItemsSource = new List<string>();
+            CodeWriterMessageFilterServices.Text = string.Empty;
+        }
+
+        private void ClearMetadataProviderServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MetadataProviderServices.ItemsSource = new List<string>();
+            MetadataProviderServices.Text = string.Empty;
+        }
+
+        private void ClearMetadataProviderQueryServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MetadataProviderQueryServices.ItemsSource = new List<string>();
+            MetadataProviderQueryServices.Text = string.Empty;
+        }
+
+        private void ClearCodeGenerationServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            CodeGenerationServices.ItemsSource = new List<string>();
+            CodeGenerationServices.Text = string.Empty;
+        }
+
+        private void ClearNamingServiceButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            NamingServices.ItemsSource = new List<string>();
+            NamingServices.Text = string.Empty;
         }
     }
 }

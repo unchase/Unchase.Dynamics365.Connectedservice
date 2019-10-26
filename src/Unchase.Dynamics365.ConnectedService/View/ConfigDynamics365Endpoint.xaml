@@ -193,7 +193,7 @@
                 HorizontalAlignment="Stretch"
                 FontWeight="Bold"
                 IsChecked="{Binding Path=UserSettings.EnableDebugMode, Mode=TwoWay}">
-                <TextBlock Text="Enable Generation Tracing (it is may take additional several minutes)." TextWrapping="Wrap" />
+                <TextBlock Text="Enable Generation Tracing (it is may take much more additional minutes. It is recommended to use when errors occur)." TextWrapping="Wrap" />
             </CheckBox>
 
             <CheckBox
@@ -356,10 +356,6 @@
             </StackPanel>
         </StackPanel>
 
-
-
-
-
         <TextBlock
             Margin="0,10,10,5"
             HorizontalAlignment="Stretch"
@@ -382,6 +378,328 @@
             VerticalAlignment="Top"
             Visibility="Collapsed">
 
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICustomizeCodeDomService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CustomizeCodeDomServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.CustomizeCodeDomServices}"
+                    Text="{Binding Path=UserSettings.CustomizeCodeDomService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=CustomizeCodeDomServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithCustomizeCodeDomServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCustomizeCodeDomServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearCustomizeCodeDomServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearCustomizeCodeDomServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeWriterFilterService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeWriterFilterServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.CodeWriterFilterServices}"
+                    Text="{Binding Path=UserSettings.CodeWriterFilterService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=CodeWriterFilterServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithCodeWriterFilterServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeWriterFilterServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearCodeWriterFilterServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearCodeWriterFilterServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeWriterMessageFilterService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeWriterMessageFilterServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.CodeWriterMessageFilterServices}"
+                    Text="{Binding Path=UserSettings.CodeWriterMessageFilterService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=CodeWriterMessageFilterServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithCodeWriterMessageFilterServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeWriterMessageFilterServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearCodeWriterMessageFilterServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearCodeWriterMessageFilterServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the IMetadataProviderService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="MetadataProviderServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.MetadataProviderServices}"
+                    Text="{Binding Path=UserSettings.MetadataProviderService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=MetadataProviderServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithMetadataProviderServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithMetadataProviderServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearMetadataProviderServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearMetadataProviderServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the IMetaDataProviderQueryService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="MetadataProviderQueryServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.MetadataProviderQueryServices}"
+                    Text="{Binding Path=UserSettings.MetadataProviderQueryService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=MetadataProviderQueryServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithMetadataProviderQueryServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithMetadataProviderQueryServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearMetadataProviderQueryServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearMetadataProviderQueryServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the ICodeGenerationService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="CodeGenerationServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.CodeGenerationServices}"
+                    Text="{Binding Path=UserSettings.CodeGenerationService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=CodeGenerationServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithCodeGenerationServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithCodeGenerationServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearCodeGenerationServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearCodeGenerationServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
+            <TextBlock
+                Margin="0,5,10,5"
+                HorizontalAlignment="Left"
+                Text="Full name of the type to use as the INamingService : "
+                TextWrapping="WrapWithOverflow" />
+            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="NamingServices"
+                    Grid.Column="0"
+                    Margin="0,5,10,0"
+                    HorizontalAlignment="Stretch"
+                    IsEditable="False"
+                    ItemsSource="{Binding Path=UserSettings.NamingServices}"
+                    Text="{Binding Path=UserSettings.NamingService, Mode=TwoWay, TargetNullValue=''}"
+                    ToolTip="{Binding ElementName=NamingServices, Path=Text, Mode=OneWay}" />
+                <Button
+                    x:Name="OpenFileWithNamingServiceButton"
+                    Grid.Column="2"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="15,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="OpenFileWithNamingServiceButton_OnClick">
+                    <TextBlock Text="Browse" />
+                </Button>
+                <Button
+                    x:Name="ClearNamingServiceButton"
+                    Grid.Column="1"
+                    Width="70"
+                    Height="20"
+                    MinHeight="20"
+                    MaxHeight="20"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    Click="ClearNamingServiceButton_OnClick">
+                    <TextBlock Text="Clear" />
+                </Button>
+            </Grid>
+
             <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -402,237 +720,6 @@
                     Margin="5,5,0,0"
                     HorizontalAlignment="Right"
                     Click="OpenFileWithAllServicesButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the ICustomizeCodeDomService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="CustomizeCodeDomServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.CustomizeCodeDomServices}"
-                    Text="{Binding Path=UserSettings.CustomizeCodeDomService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithCustomizeCodeDomServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithCustomizeCodeDomServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the ICodeWriterFilterService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="CodeWriterFilterServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.CodeWriterFilterServices}"
-                    Text="{Binding Path=UserSettings.CodeWriterFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithCodeWriterFilterServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithCodeWriterFilterServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the ICodeWriterMessageFilterService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="CodeWriterMessageFilterServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.CodeWriterMessageFilterServices}"
-                    Text="{Binding Path=UserSettings.CodeWriterMessageFilterService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithCodeWriterMessageFilterServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithCodeWriterMessageFilterServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the IMetadataProviderService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="MetadataProviderServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.MetadataProviderServices}"
-                    Text="{Binding Path=UserSettings.MetadataProviderService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithMetadataProviderServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithMetadataProviderServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the IMetaDataProviderQueryService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="MetadataProviderQueryServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.MetadataProviderQueryServices}"
-                    Text="{Binding Path=UserSettings.MetadataProviderQueryService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithMetadataProviderQueryServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithMetadataProviderQueryServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the ICodeGenerationService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="CodeGenerationServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.CodeGenerationServices}"
-                    Text="{Binding Path=UserSettings.CodeGenerationService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithCodeGenerationServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithCodeGenerationServiceButton_OnClick">
-                    <TextBlock Text="Browse" />
-                </Button>
-            </Grid>
-
-            <TextBlock
-                Margin="0,5,10,5"
-                HorizontalAlignment="Left"
-                Text="Full name of the type to use as the INamingService : "
-                TextWrapping="WrapWithOverflow" />
-            <Grid Margin="20,5,10,5" HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    x:Name="NamingServices"
-                    Grid.Column="0"
-                    Margin="0,5,10,0"
-                    HorizontalAlignment="Stretch"
-                    IsEditable="True"
-                    ItemsSource="{Binding Path=UserSettings.NamingServices}"
-                    Text="{Binding Path=UserSettings.NamingService, Mode=TwoWay, TargetNullValue='Enter full name of the type...'}"
-                    ToolTip="Example : " />
-                <Button
-                    x:Name="OpenFileWithNamingServiceButton"
-                    Grid.Column="1"
-                    Width="70"
-                    Height="20"
-                    MinHeight="20"
-                    MaxHeight="20"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    Click="OpenFileWithNamingServiceButton_OnClick">
                     <TextBlock Text="Browse" />
                 </Button>
             </Grid>

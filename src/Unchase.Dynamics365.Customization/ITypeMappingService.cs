@@ -13,7 +13,7 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Retrieves a CodeTypeReference for the entity set being generated.
 		/// </summary>
-        CodeTypeReference GetTypeForEntity(EntityMetadata entityMetadata, IServiceProvider services);
+        Task<CodeTypeReference> GetTypeForEntityAsync(EntityMetadata entityMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Retrieves a CodeTypeReference for the attribute being generated.
@@ -23,16 +23,16 @@ namespace Unchase.Dynamics365.Customization
 		/// <summary>
 		/// Retrieves a CodeTypeReference for the 1:N, N:N, or N:1 relationship being generated.
 		/// </summary>
-        CodeTypeReference GetTypeForRelationship(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata, IServiceProvider services);
+        Task<CodeTypeReference> GetTypeForRelationshipAsync(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata, IServiceProvider services);
 
 		/// <summary>
 		/// Retrieves a CodeTypeReference for the Request Field being generated.
 		/// </summary>
-        CodeTypeReference GetTypeForRequestField(SdkMessageRequestField requestField, IServiceProvider services);
+        Task<CodeTypeReference> GetTypeForRequestFieldAsync(SdkMessageRequestField requestField, IServiceProvider services);
 
 		/// <summary>
 		/// Retrieves a CodeTypeReference for the Response Field being generated.
 		/// </summary>
-        CodeTypeReference GetTypeForResponseField(SdkMessageResponseField responseField, IServiceProvider services);
+        Task<CodeTypeReference> GetTypeForResponseFieldAsync(SdkMessageResponseField responseField, IServiceProvider services);
 	}
 }

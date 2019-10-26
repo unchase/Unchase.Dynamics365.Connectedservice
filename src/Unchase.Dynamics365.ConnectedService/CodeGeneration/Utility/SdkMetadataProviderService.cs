@@ -12,7 +12,7 @@ using Unchase.Dynamics365.Customization;
 
 namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 {
-    internal sealed class SdkMetadataProviderService : IMetadataProviderService2, IMetadataProviderService
+    internal sealed class SdkMetadataProviderService : IMetadataProviderService2
 	{
         internal SdkMetadataProviderService(CrmSvcUtilParameters parameters)
 		{
@@ -54,9 +54,9 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 					throw new Exception("Connection to CRM is not established. Aborting process.");
 				}
 				this.SetConnectionTimeoutValues();
-				var entityMetadata = serviceProvider.MetadataProviderQueryService.RetrieveEntities(organizationService);
-				var optionSetMetadata = serviceProvider.MetadataProviderQueryService.RetrieveOptionSets(organizationService);
-				var messages = serviceProvider.MetadataProviderQueryService.RetrieveSdkRequests(organizationService);
+				var entityMetadata = await serviceProvider.MetadataProviderQueryService.RetrieveEntitiesAsync(organizationService);
+				var optionSetMetadata = await serviceProvider.MetadataProviderQueryService.RetrieveOptionSetsAsync(organizationService);
+				var messages = await serviceProvider.MetadataProviderQueryService.RetrieveSdkRequestsAsync(organizationService);
 				this._organizationMetadata = this.CreateOrganizationMetadata(entityMetadata, optionSetMetadata, messages);
 			}
 			return this._organizationMetadata;

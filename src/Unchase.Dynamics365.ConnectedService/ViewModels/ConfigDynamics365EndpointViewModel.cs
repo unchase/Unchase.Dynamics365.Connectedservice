@@ -189,6 +189,92 @@ namespace Unchase.Dynamics365.ConnectedService.ViewModels
             }
         }
 
+        #region Customization
+        private string _customizeCodeDomService;
+        public string CustomizeCodeDomService
+        {
+            get => _customizeCodeDomService;
+            set
+            {
+                _customizeCodeDomService = value;
+                UserSettings.CustomizeCodeDomService = value;
+                OnPropertyChanged(nameof(CustomizeCodeDomService));
+            }
+        }
+
+        private string _codeWriterFilterService;
+        public string CodeWriterFilterService
+        {
+            get => _codeWriterFilterService;
+            set
+            {
+                _codeWriterFilterService = value;
+                UserSettings.CodeWriterFilterService = value;
+                OnPropertyChanged(nameof(CodeWriterFilterService));
+            }
+        }
+
+        private string _codeWriterMessageFilterService;
+        public string CodeWriterMessageFilterService
+        {
+            get => _codeWriterMessageFilterService;
+            set
+            {
+                _codeWriterMessageFilterService = value;
+                UserSettings.CodeWriterMessageFilterService = value;
+                OnPropertyChanged(nameof(CodeWriterMessageFilterService));
+            }
+        }
+
+        private string _metadataProviderService;
+        public string MetadataProviderService
+        {
+            get => _metadataProviderService;
+            set
+            {
+                _metadataProviderService = value;
+                UserSettings.MetadataProviderService = value;
+                OnPropertyChanged(nameof(MetadataProviderService));
+            }
+        }
+
+        private string _metadataProviderQueryService;
+        public string MetadataProviderQueryService
+        {
+            get => _metadataProviderQueryService;
+            set
+            {
+                _metadataProviderQueryService = value;
+                UserSettings.MetadataProviderQueryService = value;
+                OnPropertyChanged(nameof(MetadataProviderQueryService));
+            }
+        }
+
+        private string _codeGenerationService;
+        public string CodeGenerationService
+        {
+            get => _codeGenerationService;
+            set
+            {
+                _codeGenerationService = value;
+                UserSettings.CodeGenerationService = value;
+                OnPropertyChanged(nameof(CodeGenerationService));
+            }
+        }
+
+        private string _namingService;
+        public string NamingService
+        {
+            get => _namingService;
+            set
+            {
+                _namingService = value;
+                UserSettings.NamingService = value;
+                OnPropertyChanged(nameof(NamingService));
+            }
+        }
+        #endregion
+
         public UserSettings UserSettings { get; }
 
         public Wizard InternalWizard;
@@ -252,6 +338,13 @@ namespace Unchase.Dynamics365.ConnectedService.ViewModels
             this.GenerateMessages = userSettings.GenerateMessages;
             this.MessageNamespace = userSettings.MessageNamespace;
             this.GenerateCustomActions = userSettings.GenerateCustomActions;
+            this.CustomizeCodeDomService = userSettings.CustomizeCodeDomService;
+            this.CodeWriterFilterService = userSettings.CodeWriterFilterService;
+            this.CodeWriterMessageFilterService = userSettings.CodeWriterMessageFilterService;
+            this.MetadataProviderService = userSettings.MetadataProviderService;
+            this.MetadataProviderQueryService = userSettings.MetadataProviderQueryService;
+            this.CodeGenerationService = userSettings.CodeGenerationService;
+            this.NamingService = userSettings.NamingService;
         }
         #endregion
 

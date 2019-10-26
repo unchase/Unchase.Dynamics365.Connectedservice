@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
@@ -38,9 +39,10 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 
 		private string Namespace { get; }
 
-        CodeTypeReference ITypeMappingService.GetTypeForEntity(EntityMetadata entityMetadata, IServiceProvider services)
+        async Task<CodeTypeReference> ITypeMappingService.GetTypeForEntityAsync(EntityMetadata entityMetadata,
+            IServiceProvider services)
 		{
-			var nameForEntity = ((INamingService)services?.GetService(typeof(INamingService)))?.GetNameForEntity(entityMetadata, services);
+			var nameForEntity = await ((INamingService)services?.GetService(typeof(INamingService)))?.GetNameForEntityAsync(entityMetadata, services);
 			return this.TypeRef(nameForEntity);
 		}
 
@@ -93,20 +95,28 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			return TypeMappingService.TypeRef(type);
 		}
 
-		CodeTypeReference ITypeMappingService.GetTypeForRelationship(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata, IServiceProvider services)
+		async Task<CodeTypeReference> ITypeMappingService.GetTypeForRelationshipAsync(
+            RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata,
+            IServiceProvider services)
 		{
-			var nameForEntity = ((INamingService)services?.GetService(typeof(INamingService)))?.GetNameForEntity(otherEntityMetadata, services);
+			var nameForEntity = await ((INamingService)services?.GetService(typeof(INamingService)))?.GetNameForEntityAsync(otherEntityMetadata, services);
 			return this.TypeRef(nameForEntity);
 		}
 
-		CodeTypeReference ITypeMappingService.GetTypeForRequestField(SdkMessageRequestField requestField, IServiceProvider services)
+        async Task<CodeTypeReference> ITypeMappingService.GetTypeForRequestFieldAsync(SdkMessageRequestField requestField,
+            IServiceProvider services)
 		{
-			return this.GetTypeForField(requestField.CLRFormatter, requestField.IsGeneric);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return this.GetTypeForField(requestField.CLRFormatter, requestField.IsGeneric);
 		}
 
-		CodeTypeReference ITypeMappingService.GetTypeForResponseField(SdkMessageResponseField responseField, IServiceProvider services)
+        async Task<CodeTypeReference> ITypeMappingService.GetTypeForResponseFieldAsync(SdkMessageResponseField responseField,
+            IServiceProvider services)
 		{
-			return this.GetTypeForField(responseField.CLRFormatter, false);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStartAsync("Entering {0}", MethodBase.GetCurrentMethod().Name);
+            await CrmSvcUtil.CrmSvcUtilLogger.TraceMethodStopAsync("Exiting {0}", MethodBase.GetCurrentMethod().Name);
+            return this.GetTypeForField(responseField.CLRFormatter, false);
 		}
 
 		private async Task<CodeTypeReference> BuildCodeTypeReferenceForOptionSetAsync(string attributeName, EntityMetadata entityMetadata, OptionSetMetadataBase attributeOptionSet, IServiceProvider services)
@@ -114,10 +124,10 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			var codeWriterFilterService = (ICodeWriterFilterService)services?.GetService(typeof(ICodeWriterFilterService));
 			var namingService = (INamingService)services?.GetService(typeof(INamingService));
 			var codeGenerationService = (ICodeGenerationService)services?.GetService(typeof(ICodeGenerationService));
-			if (codeWriterFilterService != null && codeWriterFilterService.GenerateOptionSet(attributeOptionSet, services))
+			if (codeWriterFilterService != null && await codeWriterFilterService.GenerateOptionSetAsync(attributeOptionSet, services))
 			{
-				var nameForOptionSet = namingService.GetNameForOptionSet(entityMetadata, attributeOptionSet, services);
-				var typeForOptionSet = codeGenerationService.GetTypeForOptionSet(entityMetadata, attributeOptionSet, services);
+				var nameForOptionSet = await namingService.GetNameForOptionSetAsync(entityMetadata, attributeOptionSet, services);
+				var typeForOptionSet = await codeGenerationService.GetTypeForOptionSetAsync(entityMetadata, attributeOptionSet, services);
 				if (typeForOptionSet == CodeGenerationType.Class)
 				{
 					return this.TypeRef(nameForOptionSet);
@@ -140,7 +150,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 			{
 				return TypeMappingService.TypeRef(typeof(IEnumerable<>), TypeMappingService.TypeRef(typeof(Entity)));
 			}
-			return TypeMappingService.TypeRef(typeof(IEnumerable<>), this.TypeRef(namingService?.GetNameForEntity(entityMetadata, services)));
+			return TypeMappingService.TypeRef(typeof(IEnumerable<>), this.TypeRef(await namingService?.GetNameForEntityAsync(entityMetadata, services)));
 		}
 
 		internal static OptionSetMetadataBase GetAttributeOptionSet(AttributeMetadata attribute)
