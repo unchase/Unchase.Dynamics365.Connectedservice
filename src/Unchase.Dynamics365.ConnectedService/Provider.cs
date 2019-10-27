@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -36,8 +37,8 @@ namespace Unchase.Dynamics365.ConnectedService
 
         public override IEnumerable<Tuple<string, Uri>> GetSupportedTechnologyLinks()
         {
-            //ToDo: add more links
             yield return Tuple.Create("Developer Guide for Dynamics 365 Customer Engagement (on-premises), version 9.x", new Uri("https://docs.microsoft.com/en-us/dynamics365/customerengagement/on-premises/developer/overview"));
+            yield return Tuple.Create("Use the Common Data Service Organization Service", new Uri("https://docs.microsoft.com/en-US/powerapps/developer/common-data-service/org-service/overview"));
         }
     }
 }
