@@ -20,7 +20,78 @@ For more information, see [Create Extensions for the Connected Service]().
 
 ## Create Extensions for the Connected Service
 
-*//ToDo: add description for customization*
+*//ToDo: add description for customization (or gif)*
+
+1. Create a **.NET Framework 4.7.2 library** project 
+
+2. Add **[Unchase.Dynamics365.Customization](https://www.nuget.org/packages/Unchase.Dynamics365.Customization/)** NuGet package to your project
+
+3. Add a custom `public class` that implements one of interfaces from NuGet package: 
+
+* `ICustomizeCodeDomService`
+* `ICodeWriterFilterService`
+* `ICodeWriterMessageFilterService`
+* `IMetadataProviderService`
+* `IMetaDataProviderQueryService`
+* `ICodeGenerationService`
+* `INamingService`
+
+4. The following sample code demonstrates how to write an extension:
+
+```csarp
+using System;
+using System.Threading.Tasks;
+using Microsoft.Xrm.Sdk.Metadata;
+using Unchase.Dynamics365.Customization;
+
+namespace TestDynamics
+{
+    /// <summary>
+    /// Sample extension for the "Unchase Dynamics365 Connected Service" that generates early-bound
+    /// classes for custom entities.
+    /// </summary>
+    public sealed class BasicFilteringService : ICodeWriterFilterService
+    {
+        public BasicFilteringService(ICodeWriterFilterService defaultService)
+        {
+            this.DefaultService = defaultService;
+        }
+
+        private ICodeWriterFilterService DefaultService { get; set; }
+
+        public async Task<bool> GenerateAttributeAsync(AttributeMetadata attributeMetadata, IServiceProvider services)
+        {
+            return await this.DefaultService.GenerateAttributeAsync(attributeMetadata, services);
+        }
+
+        public async Task<bool> GenerateEntityAsync(EntityMetadata entityMetadata, IServiceProvider services)
+        {
+            if (!entityMetadata.IsCustomEntity.GetValueOrDefault()) { return false; }
+            return await this.DefaultService.GenerateEntityAsync(entityMetadata, services);
+        }
+
+        public async Task<bool> GenerateOptionAsync(OptionMetadata optionMetadata, IServiceProvider services)
+        {
+            return await this.DefaultService.GenerateOptionAsync(optionMetadata, services);
+        }
+
+        public async Task<bool> GenerateOptionSetAsync(OptionSetMetadataBase optionSetMetadata, IServiceProvider services)
+        {
+            return await this.DefaultService.GenerateOptionSetAsync(optionSetMetadata, services);
+        }
+
+        public async Task<bool> GenerateRelationshipAsync(RelationshipMetadataBase relationshipMetadata, EntityMetadata otherEntityMetadata, IServiceProvider services)
+        {
+            return await this.DefaultService.GenerateRelationshipAsync(relationshipMetadata, otherEntityMetadata, services);
+        }
+
+        public async Task<bool> GenerateServiceContextAsync(IServiceProvider services)
+        {
+            return await this.DefaultService.GenerateServiceContextAsync(services);
+        }
+    }
+}
+```
 
 ## Generate an OrganizationServiceContext class
 The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) can also be used to generate a class derived from the [OrganizationServiceContext](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xrm.sdk.client.organizationservicecontext?view=dynamics-general-ce-9) class that acts as an entity container in the entity data model. 
