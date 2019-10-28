@@ -70,13 +70,9 @@ The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unch
 
 *//ToDo: add description for customization (or gif)*
 
-1. Create a **.NET Framework 4.7.2 library** project 
-
-//ToDo: add image
+1. Create a **.NET Framework 4.7.2 library** project
 
 2. Add **[Unchase.Dynamics365.Customization](https://www.nuget.org/packages/Unchase.Dynamics365.Customization/)** NuGet package to your project
-
-//ToDo: add image
 
 3. Add a custom `public class` that implements one of interfaces from NuGet package: 
 
