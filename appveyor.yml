@@ -21,7 +21,7 @@ deploy:
   tag: v$(appveyor_build_version)
   release: Unchase.Dynamics365.ConnectedService-v$(appveyor_build_version)
   auth_token:
-    secure: __________________________________________________________
+    secure: 5YjB5tKbw0Z/mnSTKxo3WLD9TWuyGpGPhaNlSTA+cFA1oORUk46i6tPuyvekHaS9
   repository: unchase/Unchase.Dynamics365.ConnectedService
   artifact: /.*\.vsix/
   force_update: true
