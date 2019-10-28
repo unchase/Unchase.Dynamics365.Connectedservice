@@ -42,7 +42,9 @@ Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https
 
 ![Visual Studio 2019 Extensions](img/VS2019Extensions.png)
 
-*//ToDo: add image with downloading the Connected Service to Visual Studio*
+*Download the Connected Service in Visual Studio Community 2019 v16.1.3*:
+
+![Download Connected Service](img/DownloadConnectedService.png)
 
 *Select the Connected Service in Visual Studio*:
 

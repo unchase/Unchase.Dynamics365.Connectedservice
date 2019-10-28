@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{451CDF90-524
 		..\img\ConfigurationConnectingCRMInteractiveLogin.png = ..\img\ConfigurationConnectingCRMInteractiveLogin.png
 		..\img\ConfigurationCustomization.png = ..\img\ConfigurationCustomization.png
 		..\img\ConfigurationEndpoint.png = ..\img\ConfigurationEndpoint.png
+		..\img\DownloadConnectedService.png = ..\img\DownloadConnectedService.png
 		..\img\Unchase-Dynamics365-Connected-Service-Logo.png = ..\img\Unchase-Dynamics365-Connected-Service-Logo.png
 		..\img\UseConnectedService.png = ..\img\UseConnectedService.png
 		..\img\VS2017Extensions.png = ..\img\VS2017Extensions.png
