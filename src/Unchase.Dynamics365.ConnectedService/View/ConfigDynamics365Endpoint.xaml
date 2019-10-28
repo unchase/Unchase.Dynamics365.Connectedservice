@@ -134,7 +134,7 @@
                 Margin="0,5,10,5"
                 HorizontalAlignment="Stretch"
                 FontWeight="Bold"
-                Text="Generated proxy code file name prefix ('Generated' will be added after this) : "
+                Text="Generated code file name prefix ('Generated' will be added after this) : "
                 TextWrapping="WrapWithOverflow" />
             <TextBox
                 x:Name="GeneratedFileName"

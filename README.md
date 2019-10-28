@@ -12,21 +12,27 @@
 * [Generate an OrganizationServiceContext class](#OrganizationServiceContext)
 * [Use generated classes](#Use)
 * [Run the Connected Service](#Run)
-* [Create Extensions for the Connected Service](#Extensions)
+  * [Additional Generation  Options](#AdditionalOptions)
+  * [Connecting to the CRM](#ConnectingCRM)
+  * [Create Extensions for the Connected Service](#Extensions)
 
 ## <a name="Start"></a> Getting Started
 
-Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 (for [VisualStudio](https://visualstudio.microsoft.com/vs/) 2019: `Extensions -> Manage Extensions`) or [download](https://marketplace.visualstudio.com/items?itemName=unchase.unchaseDynamics365ConnectedService)  as `VSIX` package from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365connectedservice):
+Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 (for [VisualStudio](https://visualstudio.microsoft.com/vs/) 2019: `Extensions -> Manage Extensions`) or [download](https://marketplace.visualstudio.com/items?itemName=unchase.unchaseDynamics365ConnectedService)  as `VSIX` package from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365connectedservice).
+
+*"Extensions and Updates..." menu item in Visual Studio Community 2017 v15.9.12*:
 
 ![Visual Studio 2017 Extensions](img/VS2017Extensions.png)
 
-*“Extensions and Updates…” menu item in Visual Studio Community 2017 v15.9.12*
+*"Manage Extensions" menu item in Visual Studio Community 2019 v16.1.3*:
 
 ![Visual Studio 2019 Extensions](img/VS2019Extensions.png)
 
-*“Manage Extensions” menu item in Visual Studio Community 2019 v16.1.3*
-
 *//ToDo: add image with downloading and adding the Connected Service to Visual Studio*
+
+*Select the Connected Service in Visual Studio*:
+
+![Visual Studio Connected Services](img/UseConnectedService.png)
 
 ## <a name="Entity"></a> Generate entity classes
 The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) creates a `Microsoft Visual C#` or `Visual Basic .NET` (or `C++`) output file that contains strongly-typed classes for entities in your organization. 
@@ -44,8 +50,6 @@ This class also exposes a [SaveChanges()](https://docs.microsoft.com/en-us/dotne
 
 For more information, see Use [OrganizationServiceContext](https://docs.microsoft.com/en-US/powerapps/developer/common-data-service/org-service/organizationservicecontext).
 
-*//ToDo: add image with option*
-
 ## <a name="Use"></a> Use generated classes
 The classes created by the [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) are designed to be built into a class library that can be referenced by projects that use **Common Data Service**. 
 After you have generated the class file using the *Connected Service*, you should add the file to your Visual Studio project.
@@ -58,21 +62,71 @@ The following lists assemblies that must be referenced in your project when you 
 
 These assemblies are part of the [Microsoft.CrmSdk.CoreAssemblies](https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies/) NuGet package. Use this Nuget packages to add these assemblies to your Visual Studio project.
 
-*//ToDo: add gif?*
-
 ## <a name="Run"></a> Run the Connected Service
 
-The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) takes several parameters that determine the contents of the file that is created:
+The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) takes several main parameters that determine the contents of the file that is created:
 
-*//ToDo: add image (with options desription)*
+* **`Generating Language`** option - C# or Visual Basic or C++ code generation option
 
-## <a name="Extensions"></a> Create Extensions for the Connected Service
+* **`Service name`** - the name of the folder (after generation) in *Connected Service* directory in the project (by default, if field is empty — *Dynamics365Service*)
+
+* **`Dynamics 365 service URI`** - the organization service endpoint URI (URL or local file)
+
+![Connected Service Configuration](img/ConfigurationEndpoint.png)
+
+### <a name="AdditionalOptions"></a> Additional Generation  Options
+
+Also there are several additional options:
+
+* **`Namespace`** - the namespace for the generated proxy code. The default namespace is the global namespace
+
+* **`Generated code file name prefix`** - prefix for generated file ('Generated' will be added after this)
+
+* **`Service Context Name`** - the name for the generated service context. If a value is passed in, it will be used for the Service Context. If no value is supplied, no service context is created)
+
+* **`Generate messages`** *checkbox* - allows generate messages
+
+  * **`Message Namespace`** - namespace of messages to generate
+
+* **`Generate wrapper classes for custom actions`** *checkbox* - generate request and response classes for custom actions
+
+* **`Enable Generation Tracing`** *checkbox* - it is may take much more additional minutes. It is recommended to use when errors occur
+
+* **`Add client NuGet-package before generation`** *checkbox* - allows automatically add [Microsoft.CrmSdk.CoreAssemblies](https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies/) NuGet package to the client project
+
+* **`Open generated files on complete in IDE`** *checkbox* - allows automatically open the generated files in IDE after generation process
+
+![Connected Service Configuration - Additional](img/ConfigurationAdditionalOptions.png)
+
+### <a name="ConnectingCRM"></a> Connecting to the CRM
+
+There are several ways to connect to the CRM:
+
+![Connected Service Configuration - Connecting CRM](img/ConfigurationConnectingCRM.png)
+
+* **`Interactive Login`** - presents a login dialog to log into the **Dynamics 365** service with, if passed all other connect info is ignored:
+
+![Connected Service Configuration - Connecting CRM - Interactive Login](img/ConfigurationConnectingCRMInteractiveLogin.png)
+
+* **`Connection String`** - contains information, provided as a single string, for connecting to a **Dynamics 365** *organization* (if provided, all other connect info is ignored):
+
+![Connected Service Configuration - Connecting CRM - Connection String](img/ConfigurationConnectingCRMConnectionString.png)
+
+* **`Authentication Credentials`** - connecting to the server for authentication. With:
+
+    * **`Use OAuth`** *checkbox* - try to login with oAuth to CRM Online
+
+    * **`UserName`**, **`Password`** and **`Domain`** - credentials to connect to the CRM:
+
+![Connected Service Configuration - Connecting CRM - Authentication](img/ConfigurationConnectingCRMAuthentication.png)
+
+### <a name="Extensions"></a> Create Extensions for the Connected Service
 
 1. Create a **.NET Framework 4.7.2 library** project
 
 2. Add **[Unchase.Dynamics365.Customization](https://www.nuget.org/packages/Unchase.Dynamics365.Customization/)** NuGet package to your project
 
-3. Add a custom *public class* that implements one of interfaces from NuGet package: 
+3. Add a custom *public class* that implements one of interfaces from NuGet package <a name="Interfaces"></a>: 
 
 * **`ICustomizeCodeDomService`** - called after the CodeDOM generation has been completed, assuming the default instance of `ICodeGenerationService`. It is useful for generating additional classes, such as the constants in picklists
 
@@ -144,6 +198,12 @@ namespace TestDynamics
     }
 }
 ```
+
+5. Build the project so that the output **dll** file is created
+
+6. `Browse` created **dll** file with one or all classes that implements [interfaces](#Interfaces) to add them into generation process:
+
+![Connected Service Configuration - Customization](img/ConfigurationCustomization.png)
 
 ## HowTos
 
