@@ -5,6 +5,20 @@
 
 > The project is developed and maintained by [Nikolay Chebotov (**Unchase**)](https://github.com/unchase).
 
+## Builds status
+
+|Status|Value|
+|:----|:---:|
+|Build|[![Build status](https://ci.appveyor.com/api/projects/status/5whpp549pnr3gs6n)](https://ci.appveyor.com/project/unchase/unchase.dynamics365.connectedservice)
+|Buid History|![Build history](https://buildstats.info/appveyor/chart/unchase/unchase-dynamics365-connectedservice)
+|GitHub Release|[![GitHub release](https://img.shields.io/github/release/unchase/Unchase.dynamics365.Connectedservice.svg)](https://github.com/unchase/Unchase.dynamics365.Connectedservice/releases/latest)
+|GitHub Release Date|[![GitHub Release Date](https://img.shields.io/github/release-date/unchase/Unchase.dynamics365.Connectedservice.svg)](https://github.com/unchase/Unchase.dynamics365.Connectedservice/releases/latest)
+|GitHub Release Downloads|[![Github Releases](https://img.shields.io/github/downloads/unchase/Unchase.dynamics365.Connectedservice/total.svg)](https://github.com/unchase/Unchase.dynamics365.Connectedservice/releases/latest)
+|VS Marketplace|[![VS Marketplace](http://vsmarketplacebadge.apphb.com/version-short/unchase.Unchasedynamics365ConnectedService.svg)](https://marketplace.visualstudio.com/items?itemName=unchase.unchasedynamics365ConnectedService)
+|VS Marketplace Downloads|[![VS Marketplace Downloads](http://vsmarketplacebadge.apphb.com/downloads-short/unchase.Unchasedynamics365ConnectedService.svg)](https://marketplace.visualstudio.com/items?itemName=unchase.unchasedynamics365ConnectedService)
+|VS Marketplace Installs|[![VS Marketplace Installs](http://vsmarketplacebadge.apphb.com/installs-short/unchase.Unchasedynamics365ConnectedService.svg)](https://marketplace.visualstudio.com/items?itemName=unchase.unchasedynamics365ConnectedService)
+
+
 ## Table of content
 
 * [Getting Started](#Start)
@@ -28,7 +42,7 @@ Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https
 
 ![Visual Studio 2019 Extensions](img/VS2019Extensions.png)
 
-*//ToDo: add image with downloading and adding the Connected Service to Visual Studio*
+*//ToDo: add image with downloading the Connected Service to Visual Studio*
 
 *Select the Connected Service in Visual Studio*:
 
