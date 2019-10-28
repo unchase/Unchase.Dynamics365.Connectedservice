@@ -82,11 +82,11 @@ These assemblies are part of the [Microsoft.CrmSdk.CoreAssemblies](https://www.n
 
 The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) takes several main parameters that determine the contents of the file that is created:
 
-* **`Generating Language`** option - C# or Visual Basic or C++ code generation option
+* **`Generating Language`** option - the language to generate the code in. C# or Visual Basic or C++
 
 * **`Service name`** - the name of the folder (after generation) in *Connected Service* directory in the project (by default, if field is empty — *Dynamics365Service*)
 
-* **`Dynamics 365 service URI`** - the organization service endpoint URI (URL or local file)
+* **`Dynamics 365 service URI`** - The URI for the Organization service endpoint (URL or local file)
 
 ![Connected Service Configuration](img/ConfigurationEndpoint.png)
 
@@ -94,13 +94,13 @@ The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unch
 
 Also there are several additional options:
 
-* **`Namespace`** - the namespace for the generated proxy code. The default namespace is the global namespace
+* **`Namespace`** - the namespace for the generated code. The default namespace is the global namespace
 
-* **`Generated code file name prefix`** - prefix for generated file ('Generated' will be added after this)
+* **`Generated code file name prefix`** - the file name prefix for the generated code ('Generated' will be added after this)
 
-* **`Service Context Name`** - the name for the generated service context. If a value is passed in, it will be used for the Service Context. If no value is supplied, no service context is created)
+* **`Service Context Name`** - the name for the generated service context class. If a value is passed in, it will be used for the Service Context. If no value is supplied, no service context is created)
 
-* **`Generate messages`** *checkbox* - allows generate messages
+* **`Generate messages`** *checkbox* - generate messages
 
   * **`Message Namespace`** - namespace of messages to generate
 
@@ -120,19 +120,25 @@ There are several ways to connect to the CRM:
 
 ![Connected Service Configuration - Connecting CRM](img/ConfigurationConnectingCRM.png)
 
-* **`Interactive Login`** - presents a login dialog to log into the **Dynamics 365** service with, if passed all other connect info is ignored:
+* **`Interactive Login`** - when used, a dialog to log into the **Common Data Service service** is displayed. All other connection related parameters specified on the Connected Service options are ignored:
 
 ![Connected Service Configuration - Connecting CRM - Interactive Login](img/ConfigurationConnectingCRMInteractiveLogin.png)
 
-* **`Connection String`** - contains information, provided as a single string, for connecting to a **Dynamics 365** *organization* (if provided, all other connect info is ignored):
+* **`Connection String`** - contains information, provided as a single string, for connecting to a **Common Data Service** *organization*. All other connection related parameters specified on the Connected Service options are ignored:
 
 ![Connected Service Configuration - Connecting CRM - Connection String](img/ConfigurationConnectingCRMConnectionString.png)
+
+For more information see [Use connection strings in XRM tooling to connect to Common Data Service](https://docs.microsoft.com/en-US/powerapps/developer/common-data-service/xrm-tooling/use-connection-strings-xrm-tooling-connect).
 
 * **`Authentication Credentials`** - connecting to the server for authentication. With:
 
     * **`Use OAuth`** *checkbox* - try to login with oAuth to CRM Online
 
-    * **`UserName`**, **`Password`** and **`Domain`** - credentials to connect to the CRM:
+    * **`UserName`** - the user name to use when you connect to the server for authentication
+    
+    * **`Password`** - the password to use when you connect to the server for authentication
+    
+    * **`Domain`** - the domain to authenticate against when you connect to an on-premises server
 
 ![Connected Service Configuration - Connecting CRM - Authentication](img/ConfigurationConnectingCRMAuthentication.png)
 
