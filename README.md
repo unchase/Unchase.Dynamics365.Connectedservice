@@ -19,9 +19,11 @@
 Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 (for [VisualStudio](https://visualstudio.microsoft.com/vs/) 2019: `Extensions -> Manage Extensions`) or [download](https://marketplace.visualstudio.com/items?itemName=unchase.unchaseDynamics365ConnectedService)  as `VSIX` package from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365connectedservice):
 
 ![Visual Studio 2017 Extensions](img/VS2017Extensions.png)
+
 *“Extensions and Updates…” menu item in Visual Studio Community 2017 v15.9.12*
 
 ![Visual Studio 2019 Extensions](img/VS2019Extensions.png)
+
 *“Manage Extensions” menu item in Visual Studio Community 2019 v16.1.3*
 
 *//ToDo: add image with downloading and adding the Connected Service to Visual Studio*
