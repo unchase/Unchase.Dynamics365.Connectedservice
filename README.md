@@ -68,21 +68,25 @@ The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unch
 
 ## <a name="Extensions"></a> Create Extensions for the Connected Service
 
-*//ToDo: add description for customization (or gif)*
-
 1. Create a **.NET Framework 4.7.2 library** project
 
 2. Add **[Unchase.Dynamics365.Customization](https://www.nuget.org/packages/Unchase.Dynamics365.Customization/)** NuGet package to your project
 
-3. Add a custom `public class` that implements one of interfaces from NuGet package: 
+3. Add a custom *public class* that implements one of interfaces from NuGet package: 
 
-* `ICustomizeCodeDomService`
-* `ICodeWriterFilterService`
-* `ICodeWriterMessageFilterService`
-* `IMetadataProviderService`
-* `IMetaDataProviderQueryService`
-* `ICodeGenerationService`
-* `INamingService`
+* **`ICustomizeCodeDomService`** - called after the CodeDOM generation has been completed, assuming the default instance of `ICodeGenerationService`. It is useful for generating additional classes, such as the constants in picklists
+
+* **`ICodeWriterFilterService`** - called during the process of CodeDOM generation, assuming the default instance of `ICodeGenerationService`, to determine whether a specific object or property should be generated
+
+* **`ICodeWriterMessageFilterService`** - called during the process of CodeDOM generation, assuming the default instance of `ICodeGenerationService`, to determine whether a specific message should be generated. This should not be used for requests/responses as these are already generated in *Microsoft.Crm.Sdk.Proxy.dll* and *Microsoft.Xrm.Sdk.dll*
+
+* **`IMetadataProviderService`** - called to retrieve the metadata from the server. This may be called multiple times during the generation process, so the data should be cached
+
+* **`IMetaDataProviderQueryService`**
+
+* **`ICodeGenerationService`** - core implementation of the CodeDOM generation. If this is changed, the other extensions may not behave in the manner described
+
+* **`INamingService`** - called during the CodeDOM generation to determine the name for objects, assuming the default implementation
 
 4. The following sample code demonstrates how to write an extension:
 
