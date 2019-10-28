@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{451CDF90-524
 	ProjectSection(SolutionItems) = preProject
 		..\img\buymeacoffe.png = ..\img\buymeacoffe.png
 		..\img\Unchase-Dynamics365-Connected-Service-Logo.png = ..\img\Unchase-Dynamics365-Connected-Service-Logo.png
+		..\img\VS2017Extensions.png = ..\img\VS2017Extensions.png
+		..\img\VS2019Extensions.png = ..\img\VS2019Extensions.png
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unchase.Dynamics365.Customization", "Unchase.Dynamics365.Customization\Unchase.Dynamics365.Customization.csproj", "{4498142D-910D-4BFD-B10A-2692BEF66D67}"

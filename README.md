@@ -5,26 +5,76 @@
 
 > The project is developed and maintained by [Nikolay Chebotov (**Unchase**)](https://github.com/unchase).
 
-## Getting Started
+## Table of content
+
+* [Getting Started](#Start)
+* [Generate entity classes](#Entity)
+* [Generate an OrganizationServiceContext class](#OrganizationServiceContext)
+* [Use generated classes](#Use)
+* [Run the Connected Service](#Run)
+* [Create Extensions for the Connected Service](#Extensions)
+
+## <a name="Start"></a> Getting Started
 
 Install from `Tools -> Extensions and Updates` menu inside [Visual Studio](https://visualstudio.microsoft.com/vs/) 2017 (for [VisualStudio](https://visualstudio.microsoft.com/vs/) 2019: `Extensions -> Manage Extensions`) or [download](https://marketplace.visualstudio.com/items?itemName=unchase.unchaseDynamics365ConnectedService)  as `VSIX` package from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365connectedservice):
 
+![Visual Studio 2017 Extensions](img/VS2017Extensions.png)
+*“Extensions and Updates…” menu item in Visual Studio Community 2017 v15.9.12*
+
+![Visual Studio 2019 Extensions](img/VS2019Extensions.png)
+*“Manage Extensions” menu item in Visual Studio Community 2019 v16.1.3*
+
 *//ToDo: add image with downloading and adding the Connected Service to Visual Studio*
 
-## Generate entity classes
+## <a name="Entity"></a> Generate entity classes
 The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) creates a `Microsoft Visual C#` or `Visual Basic .NET` (or `C++`) output file that contains strongly-typed classes for entities in your organization. 
 This includes custom entities and attributes. This output file contains one class for each entity, providing early binding and *IntelliSense* support in Visual Studio to aid you as you write code. 
+
 The generated classes are partial classes that can be extended with custom business logic in separate files. 
 You can also create extensions and use it in this tool. 
-For more information, see [Create Extensions for the Connected Service]().
+For more information, see [Create Extensions for the Connected Service](#Extensions).
 
-## Create Extensions for the Connected Service
+## <a name="OrganizationServiceContext"></a> Generate an OrganizationServiceContext class
+The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) can also be used to generate a class derived from the [OrganizationServiceContext](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xrm.sdk.client.organizationservicecontext?view=dynamics-general-ce-9) class that acts as an entity container in the entity data model. 
+This service context provides the facilities for tracking changes and managing identities, concurrency, and relationships. 
+
+This class also exposes a [SaveChanges()](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xrm.sdk.client.organizationservicecontext.savechanges?view=dynamics-general-ce-9#Microsoft_Xrm_Sdk_Client_OrganizationServiceContext_SaveChanges) method that writes inserts, updates, and deletes records in `Common Data Service`. 
+
+For more information, see Use [OrganizationServiceContext](https://docs.microsoft.com/en-US/powerapps/developer/common-data-service/org-service/organizationservicecontext).
+
+*//ToDo: add image with option*
+
+## <a name="Use"></a> Use generated classes
+The classes created by the [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) are designed to be built into a class library that can be referenced by projects that use **Common Data Service**. 
+After you have generated the class file using the *Connected Service*, you should add the file to your Visual Studio project.
+You must also add references to several assemblies that the generated classes are dependent upon.
+
+The following lists assemblies that must be referenced in your project when you use the generated code file.
+
+* `Microsoft.Crm.Sdk.Proxy.dll`
+* `Microsoft.Xrm.Sdk.dll`
+
+These assemblies are part of the [Microsoft.CrmSdk.CoreAssemblies](https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies/) NuGet package. Use this Nuget packages to add these assemblies to your Visual Studio project.
+
+*//ToDo: add gif?*
+
+## <a name="Run"></a> Run the Connected Service
+
+The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) takes several parameters that determine the contents of the file that is created:
+
+*//ToDo: add image (with options desription)*
+
+## <a name="Extensions"></a> Create Extensions for the Connected Service
 
 *//ToDo: add description for customization (or gif)*
 
 1. Create a **.NET Framework 4.7.2 library** project 
 
+//ToDo: add image
+
 2. Add **[Unchase.Dynamics365.Customization](https://www.nuget.org/packages/Unchase.Dynamics365.Customization/)** NuGet package to your project
+
+//ToDo: add image
 
 3. Add a custom `public class` that implements one of interfaces from NuGet package: 
 
@@ -92,36 +142,6 @@ namespace TestDynamics
     }
 }
 ```
-
-## Generate an OrganizationServiceContext class
-The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) can also be used to generate a class derived from the [OrganizationServiceContext](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xrm.sdk.client.organizationservicecontext?view=dynamics-general-ce-9) class that acts as an entity container in the entity data model. 
-This service context provides the facilities for tracking changes and managing identities, concurrency, and relationships. 
-
-This class also exposes a [SaveChanges()](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xrm.sdk.client.organizationservicecontext.savechanges?view=dynamics-general-ce-9#Microsoft_Xrm_Sdk_Client_OrganizationServiceContext_SaveChanges) method that writes inserts, updates, and deletes records in `Common Data Service`. 
-
-For more information, see Use [OrganizationServiceContext](https://docs.microsoft.com/en-US/powerapps/developer/common-data-service/org-service/organizationservicecontext).
-
-*//ToDo: add image with option*
-
-## Use generated classes
-The classes created by the [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) are designed to be built into a class library that can be referenced by projects that use `Common Data Service`. 
-After you have generated the class file using the `Connected Service`, you should add the file to your Visual Studio project.
-You must also add references to several assemblies that the generated classes are dependent upon.
-
-The following lists assemblies that must be referenced in your project when you use the generated code file.
-
-* `Microsoft.Crm.Sdk.Proxy.dll`
-* `Microsoft.Xrm.Sdk.dll`
-
-These assemblies are part of the [Microsoft.CrmSdk.CoreAssemblies](https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies/) NuGet package. Use this Nuget packages to add these assemblies to your Visual Studio project.
-
-*//ToDo: add gif?*
-
-## Run the Connected Service
-
-The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) takes several parameters that determine the contents of the file that is created:
-
-*//ToDo: add image (with options desription)*
 
 ## HowTos
 
