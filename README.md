@@ -68,8 +68,7 @@ For more information, see Use [OrganizationServiceContext](https://docs.microsof
 
 ## <a name="Use"></a> Use generated classes
 The classes created by the [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) are designed to be built into a class library that can be referenced by projects that use **Common Data Service**. 
-After you have generated the class file using the *Connected Service*, you should add the file to your Visual Studio project.
-You must also add references to several assemblies that the generated classes are dependent upon.
+After you have generated the class file using the *Connected Service*, you must also add references to several assemblies that the generated classes are dependent upon.
 
 The following lists assemblies that must be referenced in your project when you use the generated code file.
 
@@ -84,7 +83,7 @@ The [Connected Service](https://marketplace.visualstudio.com/items?itemName=Unch
 
 * **`Generating Language`** option - the language to generate the code in. C# or Visual Basic or C++
 
-* **`Service name`** - the name of the folder (after generation) in *Connected Service* directory in the project (by default, if field is empty — *Dynamics365Service*)
+* **`Service name`** - the name of the folder (after generation) in *Connected Service* directory in the project (by default, if field is empty â€” *Dynamics365Service*)
 
 * **`Dynamics 365 service URI`** - The URI for the Organization service endpoint (URL or local file)
 
