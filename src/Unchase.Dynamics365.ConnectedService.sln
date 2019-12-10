@@ -35,7 +35,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{451CDF90-524
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unchase.Dynamics365.Customization", "Unchase.Dynamics365.Customization\Unchase.Dynamics365.Customization.csproj", "{4498142D-910D-4BFD-B10A-2692BEF66D67}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Unchase.Dynamics365.Shared", "Unchase.Dynamics365.Shared\Unchase.Dynamics365.Shared.shproj", "{E669FE0A-27EF-47C5-917C-1696F3460BC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unchase.Dynamics365.TestPlugin", "Unchase.Dynamics365.TestPlugin\Unchase.Dynamics365.TestPlugin.csproj", "{55C343C9-C221-4940-A5E9-47C433DB7717}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Unchase.Dynamics365.Shared\Unchase.Dynamics365.Shared.projitems*{55c343c9-c221-4940-a5e9-47c433db7717}*SharedItemsImports = 4
+		Unchase.Dynamics365.Shared\Unchase.Dynamics365.Shared.projitems*{d754027c-cb89-42b9-a6c7-6540e253bf90}*SharedItemsImports = 4
+		Unchase.Dynamics365.Shared\Unchase.Dynamics365.Shared.projitems*{e669fe0a-27ef-47c5-917c-1696f3460bc5}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -49,6 +58,10 @@ Global
 		{4498142D-910D-4BFD-B10A-2692BEF66D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4498142D-910D-4BFD-B10A-2692BEF66D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4498142D-910D-4BFD-B10A-2692BEF66D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C343C9-C221-4940-A5E9-47C433DB7717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C343C9-C221-4940-A5E9-47C433DB7717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C343C9-C221-4940-A5E9-47C433DB7717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C343C9-C221-4940-A5E9-47C433DB7717}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

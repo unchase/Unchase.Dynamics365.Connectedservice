@@ -9,6 +9,7 @@ using Microsoft.Xrm.Tooling.Connector;
 using System.Data.Common;
 using System.Threading.Tasks;
 using Unchase.Dynamics365.Customization;
+using Unchase.Dynamics365.Shared.Extensions;
 
 namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
 {
@@ -238,7 +239,7 @@ namespace Unchase.Dynamics365.ConnectedService.CodeGeneration.Utility
                     await CrmSvcUtil.CrmSvcUtilLogger.TraceErrorAsync("Failed to Login : {0}", ex);
 					organizationService = null;
 				}
-				return organizationService;
+                return organizationService;
 			}
 		}
 

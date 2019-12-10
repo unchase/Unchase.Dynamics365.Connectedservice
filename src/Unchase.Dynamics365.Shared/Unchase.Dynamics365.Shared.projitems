@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e669fe0a-27ef-47c5-917c-1696f3460bc5</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Unchase.Dynamics365.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Attributes\PluginEventAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Context.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Message.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Deployment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\InvocationSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\IsolationMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\SourceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\ExecutionMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Stage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\WebResourceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CheckParam.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ContextExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EntityExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EntityReferenceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IOrganizationServiceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IPluginExecutionContextExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IServiceProviderExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ITracingServiceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\QueryExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StageExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ErrorPluginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IPluginEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IPluginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IServiceCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OkPluginResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PluginBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PluginBaseWithResolvedAssemblies.cs" />
+  </ItemGroup>
+</Project>
