@@ -1,5 +1,8 @@
-#
-![Unchase Dynamics365 Connected Service Logo](img/Unchase-Dynamics365-Connected-Service-Logo.png)
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=Unchase.unchasedynamics365connectedservice">
+    <img src="img/Unchase-Dynamics365-Connected-Service-Logo.png" alt="Unchase Dynamics365 Connected Service Logo">
+  </a>
+</p>
 
 [Unchase Dynamics365 Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseDynamics365ConnectedService) is a Visual Studio 2017/2019 extension to generate early-bound .NET Framework (or C++) classes that represent the entity data model used by Dynamics 365 for Customer Engagement.
 
