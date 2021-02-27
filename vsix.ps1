@@ -2,7 +2,7 @@
 [cmdletbinding()]
 param()
 
-$vsixUploadEndpoint = "http://vsixgallery.com/api/upload"
+$vsixUploadEndpoint = "https://www.vsixgallery.com/api/upload"
 
 function Vsix-PushArtifacts {
     [cmdletbinding()]
@@ -78,7 +78,8 @@ function Vsix-PublishToGallery{
             [byte[]]$bytes = [System.IO.File]::ReadAllBytes($vsixFile)
 
             try {
-                $response = Invoke-WebRequest $url -Method Post -Body $bytes -UseBasicParsing
+                $webclient = New-Object System.Net.WebClient
+                $webclient.UploadFile($url, $vsixFile) | Out-Null
                 'OK' | Write-Host -ForegroundColor Green
             }
             catch{
@@ -333,6 +334,12 @@ function Vsix-CreateChocolatyPackage {
             $XmlWriter.WriteElementString("projectUrl", "http://vsixgallery.com/extension/" + $id + "/")
             $XmlWriter.WriteElementString("iconUrl", "http://vsixgallery.com/extensions/" + $id + "/icon.png")
             $XmlWriter.WriteElementString("packageSourceUrl", $repoUrl)
+            $XmlWriter.WriteStartElement("dependencies")
+            $XmlWriter.WriteStartElement("dependency")
+            $XmlWriter.WriteAttributeString("id", "chocolatey-visualstudio.extension")
+            $XmlWriter.WriteAttributeString("version", "1.6.0")
+            $XmlWriter.WriteEndElement() # dependency
+            $XmlWriter.WriteEndElement() # dependencies
             $XmlWriter.WriteEndElement() # metadata
 
             $XmlWriter.WriteStartElement("files")
@@ -353,7 +360,7 @@ function Vsix-CreateChocolatyPackage {
             $sb.AppendLine("`$url = `'" + "https://vsixgallery.azurewebsites.net/extensions/" + $id + "/" + $displayName + ".vsix`'") | Out-Null
             $sb.AppendLine("`$checksum = `'" + $hash + "`'") | Out-Null
             $sb.AppendLine("`$checksumType = `'SHA256`'") | Out-Null
-            $sb.AppendLine("Install-ChocolateyVsixPackage `$name `$url -Checksum `$checksum -ChecksumType `$checksumType") | Out-Null
+            $sb.AppendLine("Install-VisualStudioVsixExtension `$name `$url -Checksum `$checksum -ChecksumType `$checksumType") | Out-Null
 
 
             New-Item ($folder.FullName + "\chocolateyInstall.ps1") -type file -force -value $sb.ToString() | Out-Null

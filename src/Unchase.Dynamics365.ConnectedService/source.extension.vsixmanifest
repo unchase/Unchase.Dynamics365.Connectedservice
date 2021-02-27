@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" ?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Unchase.Dynamics365.ConnectedService.9e1496e7-4869-4c3e-8188-2738b2d1e920" Version="1.0" Language="en-US" Publisher="Unchase" />
+        <Identity Id="Unchase.Dynamics365.ConnectedService.9e1496e7-4869-4c3e-8188-2738b2d1e920" Version="1.0.6" Language="en-US" Publisher="Unchase" />
         <DisplayName>Unchase Dynamics365 Connected Service</DisplayName>
         <Description xml:space="preserve">Connected service for Visual Studio to generate early-bound .NET Framework (or C++) classes that represent the entity data model used by Dynamics 365 for Customer Engagement.</Description>
         <MoreInfo>https://github.com/unchase/Unchase.Dynamics365.Connectedservice</MoreInfo>

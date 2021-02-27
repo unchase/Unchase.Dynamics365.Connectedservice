@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -25,7 +24,6 @@ namespace Unchase.Dynamics365.ConnectedService
                 BitmapSizeOptions.FromWidthAndHeight(64, 64)
             );
             CreatedBy = Constants.Author;
-            Version = new Version(1, 1, 0, 0);
             Version = typeof(Provider).Assembly.GetName().Version;
             MoreInfoUri = new Uri(Constants.Website);
         }
